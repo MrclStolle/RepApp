@@ -1,0 +1,19 @@
+*.dcu
+/*.dcu
+*.drc
+*.map
+*/__history/
+*trunk/src/*/__history/
+*trunk/src/__history/
+*trunk/src/ociLocal/*
+*trunk/src/bin/*
+SDIAPP_MemoryManager_EventLog.txt
+*.dia~
+*/ModelSupport_SDIAPP/*
+/test/*
+*CodeAndStuff/
+SDIAPP.ini
+.svn
+*trunk/doc/Handbücher/RepApp Programmcode Handbuch.*
+*trunk/doc/Screenshots/*
+*trunk/doc/Diagramme/repDB.dia
