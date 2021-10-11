@@ -36,6 +36,9 @@ var
   List: TStringList;
   splScreen: TFormSplashScreen;
   BoolWETeil, BoolWATeil: boolean;
+
+  taskid, bookid: string;
+  I: Integer;
 begin
   Excel := Unassigned;
   try
@@ -61,10 +64,11 @@ begin
       splScreen.Subtitle('lese excel Zeile ' + inttostr(y) + ' von ' + inttostr(Rows));
       BoolWATeil := ContentFilterTeil(Excel.Cells[y, 5].value, WATeil);
       BoolWETeil := ContentFilterTeil(Excel.Cells[y, 11].value, WETeil);
-      if (BoolWATeil and HasDigit(Excel.Cells[y, 6].value)) or (BoolWETeil and HasDigit(Excel.Cells[y, 12].value)) or
-        ((Excel.Cells[y, 1].value = '') and (containstext(Excel.Cells[y, 17].value, 'j') or
-        containstext(Excel.Cells[y, 17].value, 'n'))) then
-      // prüft auf existierende seriennummern oder offenem status
+      if (BoolWATeil and HasDigit(Excel.Cells[y, 6].value)) or (BoolWETeil and HasDigit(Excel.Cells[y, 12].value))
+      // or ((Excel.Cells[y, 1].value = '') and (containstext(Excel.Cells[y, 17].value, 'j') or
+      // containstext(Excel.Cells[y, 17].value, 'n')))
+      then // prüft auf existierende seriennummern oder offenem status
+
       begin
         // RECHNUNSSTATUS
         if lowercase(Excel.Cells[y, 17].value) = 'j' then
@@ -88,7 +92,9 @@ begin
           Status := '1';
 
         // WA-SEITE nur verarbeiten, wenn das seriennummer-feld eine zahl beinhaltet
-        if HasDigit(Excel.Cells[y, 6].value) then
+        if HasDigit(Excel.Cells[y, 6].value)
+        // or (Excel.Cells[y, 1].value = '')
+        then
         begin
           // versuche wert in DATETIME umzuwandeln, wenn nicht, versuche den wert aus WE, wenn nicht, setze wert auf 0
           if not trystrtodate(Excel.Cells[y, 2].value, WADDate) then
@@ -96,19 +102,25 @@ begin
               WADDate := 0;
           splScreen.SubTitle2('WADDate=' + datetimetostr(WADDate));
 
+          if y = 378 then
+            sleep(0);
+
           // suche KUNDE (mit und ohne vermerk) in kundenListe, wenn nicht vorhanden, erstelle neuen kunden mit vermerk
-          WAKunde := Excel.Cells[y, 3].value;
-          if WAKunde = '' then
+          if Length(Excel.Cells[y, 3].value) > 0 then
+            WAKunde := Excel.Cells[y, 3].value
+          else
             WAKunde := Excel.Cells[y, 9].value;
+          splScreen.SubTitle2('WAKunde(1)=' + WAKunde);
+
           if CustomerDictionary.ContainsName(WAKunde) then
             WAKunde := CustomerDictionary.GetCustomer(WAKunde).ID
           else if CustomerDictionary.ContainsName(WAKunde + ' (Import von Rep-Liste)') then
             WAKunde := CustomerDictionary.GetCustomer(WAKunde + ' (Import von Rep-Liste)').ID
           else
           begin
-            WAKunde := GetNextSeqIDFrom('''SEQ_KUNDEN_ID''');
-            InsertIntoCustomer(Excel.Cells[y, 3].value + ' (Import von Rep-Liste)', Service);
+            WAKunde := InsertIntoCustomer(WAKunde + ' (Import von Rep-Liste)', Service);
             CustomerDictionary.RefreshFromDatabase;
+            splScreen.SubTitle2('WAKunde(2)=' + WAKunde);
           end;
           // KOMPONENTE
           // WATeil := Excel.Cells[y, 5].value;
@@ -124,7 +136,7 @@ begin
 
           // holt nur der tatsächliche MENGENWART, ohne den 'teil von' wert; zB 5(8)
           if not HasDigit(Excel.Cells[y, 4].value) then
-            WASt := length(SplitString(WASRN, '('))
+            WASt := Length(SplitString(WASRN, '('))
           else
             WASt := strtoint(trim(SplitString(SplitString(Excel.Cells[y, 4].value, '(')[0], ' ')[0]));
           splScreen.SubTitle2('WASt =' + inttostr(WASt));
@@ -152,7 +164,9 @@ begin
         if y = 293 then
           sleep(0);
         // WE
-        if HasDigit(Excel.Cells[y, 12].value) then
+        if HasDigit(Excel.Cells[y, 12].value)
+        // or (Excel.Cells[y, 1].value = '')
+        then
         begin
           // DATETIME
           if not trystrtodate(Excel.Cells[y, 8].value, WEDDate) then
@@ -161,19 +175,22 @@ begin
           splScreen.SubTitle2('WEDate=' + datetimetostr(WEDDate));
 
           // suche KUNDE (mit und ohne vermerk) in kundenListe, wenn nicht vorhanden, erstelle neuen kunden mit vermerk
-          WEKunde := Excel.Cells[y, 9].value;
-          if WEKunde = '' then
-            WEKunde := Excel.Cells[y, 3].value;
+          if Length(Excel.Cells[y, 9].value) > 0 then
+            WEKunde := Excel.Cells[y, 9].value
+          else
+            WEKunde := WAKunde;
+          splScreen.SubTitle2('WEKunde(1)=' + WEKunde);
+
           if CustomerDictionary.ContainsName(WEKunde) then
             WEKunde := CustomerDictionary.GetCustomer(WEKunde).ID
           else if CustomerDictionary.ContainsName(WEKunde + ' (Import von Rep-Liste)') then
             WEKunde := CustomerDictionary.GetCustomer(WEKunde + ' (Import von Rep-Liste)').ID
           else
           begin
-            WEKunde := GetNextSeqIDFrom('''SEQ_KUNDEN_ID''');
-            InsertIntoCustomer(Excel.Cells[y, 9].value + ' (Import von Rep-Liste)', Service);
+            WEKunde := InsertIntoCustomer(WEKunde + ' (Import von Rep-Liste)', Service);
             CustomerDictionary.RefreshFromDatabase;
           end;
+          splScreen.SubTitle2('WEKunde(2)=' + WEKunde);
 
           // TEIL
           // WETeil := Excel.Cells[y, 11].value;
@@ -189,7 +206,7 @@ begin
 
           // MENGE
           if not HasDigit(Excel.Cells[y, 10].value) then
-            WESt := length(SplitString(WESRN, '('))
+            WESt := Length(SplitString(WESRN, '('))
           else
             WESt := strtoint(trim(SplitString(SplitString(Excel.Cells[y, 10].value, '(')[0], ' ')[0]));
           splScreen.SubTitle2('WESt =' + inttostr(WESt));
@@ -216,8 +233,9 @@ begin
         REP := Excel.Cells[y, 14].value;
         if HasDigit(Excel.Cells[y, 15].value) then
         begin
-          TReadTextAsTime.TransformToHMin(Excel.Cells[y, 15].value, min, h);
-          Time := floattostr(h + trunc(min * 100 / 60) / 100);
+          // TReadTextAsTime.TransformToHMin(Excel.Cells[y, 15].value, min, h);
+          // Time := floattostr(h + trunc(min * 100 / 60) / 100);
+          Time := Excel.Cells[y, 15].value;
         end
         else
           Time := '0';
@@ -235,10 +253,35 @@ begin
         // übertragen der werte (in dieser schleife bearbeitete zeile in excel) in die datenbank
 
         // LISTE FÜR CSV
-        splScreen.SubTitle2('füge liste hinzu');
-        List.Add(Status + ';' + datetimetostr(WADDate) + ';' + WAKunde + ';' + WATeil + ';' + inttostr(WASt) + ';' +
-          WASRN + ';' + WATWI + ';' + datetimetostr(WEDDate) + ';' + WEKunde + ';' + WETeil + ';' + inttostr(WESt) + ';'
-          + WESRN + ';' + WETWI + ';' + REP + ';' + Time + ';' + Mat + ';' + Re + ';' + BoolToYN(Service));
+        // splScreen.SubTitle2('füge liste hinzu');
+        // List.Add(Status + ';' + datetimetostr(WADDate) + ';' + WAKunde + ';' + WATeil + ';' + inttostr(WASt) + ';' +
+        // WASRN + ';' + WATWI + ';' + datetimetostr(WEDDate) + ';' + WEKunde + ';' + WETeil + ';' + inttostr(WESt) + ';'
+        // + WESRN + ';' + WETWI + ';' + REP + ';' + Time + ';' + Mat + ';' + Re + ';' + BoolToNumber(Service));
+
+        // insert into database
+        splScreen.Subtitle('Sende zur Datenbank');
+        taskid := InsertIntoTask(WAKunde, Status, REP + '   ' + Mat, '0', Re);
+
+        bookid := InsertIntoBooking(taskid, '1', datetimetostr(WADDate), '', WATWI, '', '0');
+        splScreen.SubTitle2('Task: ' + taskid + ' buchung: ' + bookid);
+        if (WADDate <> 0) and (WASt >= 1) then
+        begin
+          for I := 0 to WASt - 1 do
+          begin
+            InsertIntoBuchPos(bookid, WATeil, '1', SplitString(WASRN, ' ')[I]);
+          end;
+        end;
+
+        bookid := InsertIntoBooking(taskid, '0', datetimetostr(WEDDate), '', WETWI, '', '');
+        splScreen.SubTitle2('Task: ' + taskid + ' buchung: ' + bookid);
+        if (WEDDate <> 0) and (WESt >= 1) then
+        begin
+          for I := 0 to WESt - 1 do
+          begin
+            InsertIntoBuchPos(bookid, WETeil, '1', SplitString(WESRN, ' ')[I]);
+          end;
+        end;
+
       end;
       // ende if, ob behandelt werden soll
 
@@ -257,8 +300,8 @@ begin
 
     List.Free;
     List := nil;
-    splScreen.Free;
-    splScreen := nil;
+    // splScreen.Free;
+    // splScreen := nil;
   end;
   if List <> nil then
     List.Free;
@@ -266,8 +309,8 @@ begin
     CompSNList.Free;
   if CustServiceList <> nil then
     CustServiceList.Free;
-  if splScreen <> nil then
-    splScreen.Free;
+  // if splScreen <> nil then
+  // splScreen.Free;
 end;
 
 function CleanValue(value: string): string; // angepasst an reinem handy/mde/memor-filter
@@ -384,7 +427,9 @@ begin
       OutText := 'Memor K'
     else
       OutText := 'Memor';
-  end;
+  end
+  // else
+  // OutText := Text;
 
 end;
 

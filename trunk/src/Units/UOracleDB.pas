@@ -19,7 +19,7 @@ function GetSession: TOracleSession;
 procedure InsertIntoEmployee(name, kurz, pw: string; admin: boolean);
 procedure InsertIntoComp(name: string; BoolSerialN: boolean; UserID: String); overload;
 procedure InsertIntoComp(name: string; BoolSerialN: boolean; UserID, twiNr: String); overload;
-procedure InsertIntoCustomer(name: string; service: boolean);
+function InsertIntoCustomer(name: string; service: boolean): String;
 
 /// <summary>Führt ein INSERT-Befehl in die AUFTRAG-Tabelle der DB mithilfe der angegebenen Parameter.
 /// Optionaler Rückgabewert ist die für diesen Datensatz erstellte ID.
@@ -32,7 +32,7 @@ procedure InsertIntoCustomer(name: string; service: boolean);
 /// <param name="billStatusID"> (string) </param>
 function InsertIntoTask(customerID, statusID, comment, wareStatusID, billStatusID: string): String;
 procedure SelectXFromY(column, tableName: string; var Table: TList);
-procedure InsertIntoBooking(auftrID, buchtypID, datum, packageID, MAID, comment, hoursDez: string);
+function InsertIntoBooking(auftrID, buchtypID, datum, packageID, MAID, comment, hoursDez: string): String;
 /// <summary>Führt eine Insert-Anweisung in die Tabelle BUCHPOS_TEILE aus.
 /// </summary>
 /// <param name="BuchID"> (string) </param>
@@ -181,8 +181,9 @@ begin
     ''', ''' + UserID + ''', ''' + twiNr + ''')');
 end;
 
-procedure InsertIntoCustomer(name: string; service: boolean);
+function InsertIntoCustomer(name: string; service: boolean): String;
 begin
+  Result := GetNextSeqIDFrom('''SEQ_KUNDEN_ID''');
   ExecuteDMLQuery('Insert Into kunden values (SEQ_KUNDEN_ID.nextval, ''' + name + ''', ''' + BoolToNumber(service) +
     ''', 0 )');
 end;
@@ -197,10 +198,11 @@ begin
 end;
 
 // insert into buchung
-procedure InsertIntoBooking(auftrID, buchtypID, datum, packageID, MAID, comment, hoursDez: string);
+function InsertIntoBooking(auftrID, buchtypID, datum, packageID, MAID, comment, hoursDez: string): String;
 begin
-  ExecuteDMLQuery('Insert Into buchung values (SEQ_BUCH_ID.nextval, ' + auftrID + ', ' + buchtypID + ', ' + datum +
-    ', ''' + packageID + ''', ' + MAID + ', ''' + comment + ''', ' + StringReplace(hoursDez, ',', '.',
+  Result := GetNextSeqIDFrom('''SEQ_BUCH_ID''');
+  ExecuteDMLQuery('Insert Into BUCHUNGEN values (SEQ_BUCH_ID.nextval, ' + auftrID + ', ' + buchtypID + ', ''' + datum +
+    ''', ''' + packageID + ''', ' + MAID + ', ''' + comment + ''', ' + StringReplace(hoursDez, ',', '.',
     [rfReplaceAll]) + ')');
 end;
 
