@@ -376,10 +376,10 @@ begin
 end;
 
 procedure TRepApp.btTestMemClick(Sender: TObject);
-var
-  List: TComponentDictionary;
+// var
+// List: TComponentDictionary;
 begin
-  ImportXLS;
+  // ImportXLS;  //ausnutzen des nur im debug modus angezeigten buttons für importxls-tests
   // simple test to ceate leaks
   // List := TComponentDictionary.create(false);
   // List.Add(TComp.create('666', 'test', true, '22', 'sxe6rz78o2f'));
