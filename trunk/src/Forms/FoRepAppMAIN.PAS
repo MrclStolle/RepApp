@@ -757,6 +757,7 @@ begin
   btNewComponent.Enabled := User.admin;
   btNewCustomer.Enabled := User.admin;
   btEditCustomer.Enabled := User.admin;
+  //adminrecht zum erstellen von Benutzern wird in FoCreateEmployee gesetzt
 
   RepApp.SetStatusBar('Login erfolgreich');
 

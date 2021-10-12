@@ -339,8 +339,6 @@ begin
 end;
 
 procedure TTaskBookLists.Free;
-var
-  I: Integer;
 begin
   if WEBooks <> nil then
     WEBooks.Free;

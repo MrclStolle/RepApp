@@ -52,23 +52,30 @@ uses
 
 var
   SplashScreen: TFormSplashScreen;
-
 {$R *.RES}
 
 begin
   // loading screen
   SplashScreen := TFormSplashScreen.Create('Lade Applikation..');
 
+  try
+    SplashScreen.Subtitle('lade lokale oci-Daten');
+    oracleci.InitOCI; // this helps on "locally only" installed OCIs
+  except
+    SplashScreen.Subtitle('lade oci-Daten aus bin-Verzeichnis');
+    oracleci.ocidll := ExtractFileDir(Application.ExeName) + '\bin\oci.dll';
+    oracleci.InitOCI; // this helps on "locally only" installed OCIs
+  end;
+  // bei stolle kann mit den lokalen oci-daten nicht auf die lokale datenbank zugegriffen werden
+  // dies wird ein einrichtingsfehler seitens herrn stolle sein
+
   SplashScreen.Subtitle('Deklariere Modus');
-{$IFDEF DEBUG}  // nutzt die lokal installierten oci.dll's und versucht auf die _Debug.ini für Datenbankzugriff zuzugreifen (lokale Datenbank von Stolle, auf seinem Rechner)
+{$IFDEF DEBUG}
   ReportMemoryLeaksOnShutdown := True;
   USettings.debugmode := True;
   { TODO -ostolle -cGeneral : auf der offiziellen Datenbank auf der VM sollte ein weiterer Benutzer(User) angelegt werden,
     auf die im DEBUG-MODE zugegriffen wird, um funktionen austesten zu können }
-{$ELSE}      // nutzt sonst die vorgegebene dll's im bin-verzeichnis für den InstanClient, und die Datebank(offizielle) auf der VM
-  ReportMemoryLeaksOnShutdown := True;
-  oracleci.ocidll := ExtractFileDir(Application.ExeName) + '\bin\oci.dll';
-  oracleci.InitOCI; // this helps on "locally only" installed OCIs
+{$ELSE}
   USettings.debugmode := false;
 {$ENDIF}
   SplashScreen.Subtitle('Initialisiere App');
