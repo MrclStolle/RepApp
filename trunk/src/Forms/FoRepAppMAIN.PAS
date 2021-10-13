@@ -104,7 +104,7 @@ type
     /// <summary>
     /// Aktualisiert den Inhat der ComboBox-CustomerChoise aus der TCustomerDictionary
     /// </summary>
-    procedure RefreshCBCustomerChoise;
+    procedure RefillCBCustomerChoise;
     /// <summary>
     /// Tauscht die beiden DateTimePicker im Hauptfenster aus
     /// </summary>
@@ -158,7 +158,7 @@ begin
     EmployeeDictionary.Refresh;
     ComponentDictionary := TComponentDictionary.create(true);
     CustomerDictionary := TCustomerDictionary.create(true);
-    RefreshCBCustomerChoise;
+    RefillCBCustomerChoise;
     cbCustomerChoise.ItemIndex := 0;
 
     // debugmode settings  //debugmode wird in der DPR gesetzt
@@ -301,7 +301,7 @@ begin
   if EditCustomer.ModalResult = mrOK then
   begin
     CustomerDictionary.RefreshFromDatabase;
-    RefreshCBCustomerChoise;
+    RefillCBCustomerChoise;
     cbCustomerChoise.text := EditCustomer.ETName.text;
     RefreshScrollbox;
 
@@ -441,7 +441,7 @@ end;
 
 procedure TRepApp.cbCustomerChoiseKeyUp(Sender: TObject; var key: Word; Shift: TShiftState);
 begin
-  cbCustomerChoiseChange(Sender);
+  // cbCustomerChoiseChange(Sender);
 end;
 
 procedure TRepApp.RefreshTaskTables;
@@ -478,7 +478,7 @@ begin
     RefreshScrollbox;
 end;
 
-procedure TRepApp.RefreshCBCustomerChoise;
+procedure TRepApp.RefillCBCustomerChoise;
 begin
   cbCustomerChoise.clear;
   cbCustomerChoise.Items.Add('alle Kunden');
@@ -494,7 +494,7 @@ var
   lbCustomerTitle: TLabel;
   CustomerID: Integer;
   mindt, maxdt: tdatetime;
-  Splash: TFormSplashScreen;
+  // Splash: TFormSplashScreen;     //verursacht unangenehme vollständige markierung des combobox-textes, wodurch bei wieterer eingabe der text zurück gesetzt wird
 begin
   // prepare
   taskAnchorTop := 10;
@@ -515,7 +515,7 @@ begin
     tempscrollpos := ScrollBox1.VertScrollBar.ScrollPos;
     FreeAndNil(ScrollBox1);
   end;
-  Splash := TFormSplashScreen.create('Lade Daten..');
+  // Splash := TFormSplashScreen.create('Lade Daten..');
 
   ScrollBox1 := TScrollBox.create(self);
   ScrollBox1.hide; // prevent repainting
@@ -591,7 +591,7 @@ begin
     ScrollBox1.Show;
 
   finally
-    Splash.Free;
+    // Splash.Free;
   end;
   if countTasks > 0 then
     SetStatusBar('Insgesamt ' + IntToStr(countTasks) + ' Aufträge bei ' + IntToStr(countCustomer) + ' Kunde/n gefunden')
@@ -609,7 +609,7 @@ begin
   FrTask := TFrameTask.create(ScrollBox1, TaskID, TaskNr);
   FrTask.Top := taskAnchorTop;
   FrTask.Left := 10;
-
+  FrTask.Width := ScrollBox1.Width - FrTask.Left;
   // sets Top-Position for next TaskFrame/Object
   taskAnchorTop := taskAnchorTop + FrTask.Height + 20;
 
@@ -757,7 +757,7 @@ begin
   btNewComponent.Enabled := User.admin;
   btNewCustomer.Enabled := User.admin;
   btEditCustomer.Enabled := User.admin;
-  //adminrecht zum erstellen von Benutzern wird in FoCreateEmployee gesetzt
+  // adminrecht zum erstellen von Benutzern wird in FoCreateEmployee gesetzt
 
   RepApp.SetStatusBar('Login erfolgreich');
 

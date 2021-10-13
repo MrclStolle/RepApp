@@ -80,7 +80,6 @@ begin
 {$ENDIF}
   SplashScreen.Subtitle('Initialisiere App');
   Application.Initialize;
-  // SplashScreen.Hide;
   SplashScreen.Free;
   Application.CreateForm(TRepApp, RepApp);
   Application.Run;

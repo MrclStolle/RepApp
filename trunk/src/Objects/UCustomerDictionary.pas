@@ -2,7 +2,7 @@ unit UCustomerDictionary;
 
 interface
 
-uses SysUtils, generics.collections, UCustomer, System.classes, UOracleDB, moreUtils;
+uses SysUtils, generics.collections, UCustomer, System.classes, UOracleDB, moreUtils, FoSplashScreen;
 
 type
   /// <summary>TCustomerDictionary ist ein Objekt, welches alle Kunden von der Datenbank abrufen, diese speichern und ausgeben kann.
@@ -140,7 +140,9 @@ var
   TempTList: TList;
   I: Integer;
   row: TStringList;
+
 begin
+
   TempTList := TList.create;
   SelectXFromYWhereZOrderBy('*', 'KUNDEN', '', 'name', TempTList);
 

@@ -255,7 +255,8 @@ end;
 
 procedure TFrameTask.CreateFrBookings;
 var
-  value: TBooking;
+  // value: TBooking;
+  BookingID: String;
   frBook: TFrameBooking;
   bookingCount: Integer;
 begin
@@ -263,11 +264,12 @@ begin
   frBook := nil;
   bookingCount := 0;
   if TaskDictionary.GetTask(TaskID).BookingList <> nil then
-    for value in TaskDictionary.GetTask(TaskID).BookingList.Values do
+    // for value in TaskDictionary.GetTask(TaskID).BookingList.Values do
+    for BookingID in TaskDictionary.GetTask(TaskID).BookingOrderList do
     begin
       // create frBook
-      // frBook := TFrameBooking.Create(gbFrameBookings, Task, value);
-      frBook := TFrameBooking.Create(self, Task, value);
+      // frBook := TFrameBooking.Create(self, Task, value);
+      frBook := TFrameBooking.Create(self, Task, TaskDictionary.GetTask(TaskID).BookingList[BookingID]);
       frBook.Top := bookingCount * frBook.Height + 1;
       frBook.color := color;
       Inc(bookingCount);

@@ -18,6 +18,7 @@ type
     ID, Kommentar: String;
     CustomerID: String;
     BookingList: TObjectDictionary<string, TBooking>;
+    BookingOrderList: TStringList;
     ComponentBalanceDictionary: TObjectDictionary<String, container>;
     // normale TDictionary erzeugt wieder blöde, nicht einfach lösbare memory-leaks, daher TObjectDictionary mit container-klasse
     Status: TStatus;
@@ -76,9 +77,12 @@ begin
 
   if self.BookingList = nil then
     self.BookingList := TObjectDictionary<string, TBooking>.Create([doOwnsValues]);
+  if BookingOrderList = nil then
+    BookingOrderList := TStringList.Create;
   try
     booking := TBooking.Create(Row);
     BookingList.Add(booking.Book_PosID, booking);
+    BookingOrderList.Add(booking.Book_PosID);
     Hours := Hours + booking.hoursDez;
 
     if not booking.noBalance then
@@ -121,6 +125,8 @@ begin
     ComponentBalanceDictionary.Clear;
   if BookingList <> nil then
     BookingList.Clear;
+  if BookingOrderList <> nil then
+    BookingOrderList.Clear;
 end;
 
 procedure TTask.Free;
@@ -134,12 +140,11 @@ begin
   end;
 
   if self.BookingList <> nil then
-    // for key in BookingList.keys do
-    // begin
-    // if BookingList[key] <> nil then
-    // BookingList[key].Free;
-    // end;
     BookingList.Free;
+
+  if BookingOrderList <> nil then
+    BookingOrderList.Free;
+
   Inherited Free;
 end;
 

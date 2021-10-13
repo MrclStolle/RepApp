@@ -184,7 +184,8 @@ begin
   // whereFilter := '';
 
   ExecuteDQLQuery('select * from BUCHPOS_TEILE ' + 'left join BUCHUNGEN on BUCHPOS_TEILE.BUCHID=BUCHUNGEN.BUCHID ' +
-    'left join AUFTRAG on BUCHUNGEN.AUFTRID=AUFTRAG.AUFTRID ' + whereFilter + ' order by DATUM', BookPosTable);
+    'left join AUFTRAG on BUCHUNGEN.AUFTRID=AUFTRAG.AUFTRID ' + whereFilter + ' order by BUCHPOS_TEILE.BUCHID',
+    BookPosTable);
 
   for I := 0 to TaskTable.Count - 1 do
   begin

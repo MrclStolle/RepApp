@@ -188,7 +188,7 @@ object FormCreateTask: TFormCreateTask
   end
   object btCreateTaskWBooking: TButton
     Left = 23
-    Top = 403
+    Top = 362
     Width = 148
     Height = 25
     Hint = 'Diesem Auftrag direkt eine Buchung hinzuf'#252'gen.'
@@ -205,7 +205,7 @@ object FormCreateTask: TFormCreateTask
   end
   object btCreateTask: TButton
     Left = 23
-    Top = 362
+    Top = 403
     Width = 148
     Height = 25
     Hint = 'Auftrag wird sofort erstellt. R'#252'ckkehr zum Hauptfenster.'

@@ -2,7 +2,7 @@ unit UComponentDictionary;
 
 interface
 
-uses SysUtils, generics.collections, UComponent, System.classes, UOracleDB, moreUtils;
+uses SysUtils, generics.collections, UComponent, System.classes, UOracleDB, moreUtils, FoSplashScreen;
 
 type
   /// <summary>TComponentDictionary ist ein Objekt, welches alle Komponenten von der Datenbank abrufen, diese speichern und ausgeben kann.
@@ -172,7 +172,9 @@ var
   TempTList: TList;
   I: Integer;
   TSL: TStringList;
+
 begin
+
   // get all comonents from db
   TempTList := TList.create;
   SelectXFromYWhereZOrderBy('*', 'TEILE', '', 'NAME', TempTList);

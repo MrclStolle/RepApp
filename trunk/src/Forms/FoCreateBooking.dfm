@@ -519,7 +519,6 @@ object FormCreateBooking: TFormCreateBooking
     Font.Height = -13
     Font.Name = 'Tahoma'
     Font.Style = []
-    ModalResult = 1
     ParentFont = False
     TabOrder = 2
     OnClick = btokClick

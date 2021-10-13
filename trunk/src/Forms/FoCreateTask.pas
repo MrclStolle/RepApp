@@ -128,7 +128,7 @@ begin
 
     RepApp.cbCustomerChoise.Text := self.cbCustomerChoise.Text;
     close;
-    // ModalResult := mrOK;
+    ModalResult := mrOK;
   end
   else
     lbNoCustomer.Show;
@@ -168,10 +168,15 @@ end;
 
 procedure TFormCreateTask.cbCustomerChoiseChange(Sender: TObject);
 begin
-  Customer := CustomerDictionary.GetCustomer(cbCustomerChoise.Text);
-  btCreateTaskWBooking.Enabled := not Customer.Zahlrueckstand;
-  lbErrorNoBooking.Visible := Customer.Zahlrueckstand;
-  lbNoCustomer.Hide;
+  try
+    Customer := CustomerDictionary.GetCustomer(cbCustomerChoise.Text);
+    btCreateTaskWBooking.Enabled := not Customer.Zahlrueckstand;
+    lbErrorNoBooking.Visible := Customer.Zahlrueckstand;
+    lbNoCustomer.Hide;
+  except
+    on E: Exception do
+      // nothing
+  end;
 end;
 
 procedure TFormCreateTask.FormKeyPress(Sender: TObject; var Key: Char);

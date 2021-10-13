@@ -81,10 +81,6 @@ type
     procedure AddComponentFrCB;
     procedure cbComp(Sender: TObject);
     procedure cbSerNr(Sender: TObject);
-
-    /// <summary>
-    /// Removes a GoupBox within the Scrollbox
-    /// </summary>
     procedure RemoveComponent;
 
   public
@@ -181,6 +177,7 @@ end;
 procedure TFormCreateBooking.cbTypeIDChange(Sender: TObject);
 var
   key: String;
+  I: Integer;
 begin
   // erstellen von Komponenten-Feldern, wenn in der dictionary einträge vorhanden sind
 
@@ -198,11 +195,22 @@ begin
           begin
             if Task.ComponentBalanceDictionary[key].count < 0 then
             begin
-              AddComponentFrCB;
-              TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).cbComponent.Text := key;
-              cbComp(TComboBox(TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).Controls[3]));
-              TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).eCount.Text :=
-                IntToStr(-Task.ComponentBalanceDictionary[key].count);
+              if componentDictionary.GetComponent(key).NeedSerialNumber then
+                for I := 0 to -Task.ComponentBalanceDictionary[key].count - 1 do
+                begin
+                  AddComponentFrCB;
+                  TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).cbComponent.Text := key;
+                  cbComp(TComboBox(TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).Controls[3]));
+                  TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).eCount.Text := '1';
+                end
+              else
+              begin
+                AddComponentFrCB;
+                TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).cbComponent.Text := key;
+                cbComp(TComboBox(TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).Controls[3]));
+                TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).eCount.Text :=
+                  IntToStr(-Task.ComponentBalanceDictionary[key].count);
+              end;
             end;
           end; // end loop
         end;
@@ -219,11 +227,22 @@ begin
           begin
             if Task.ComponentBalanceDictionary[key].count > 0 then
             begin
-              AddComponentFrCB;
-              TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).cbComponent.Text := key;
-              cbComp(TComboBox(TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).Controls[3]));
-              TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).eCount.Text :=
-                IntToStr(Task.ComponentBalanceDictionary[key].count);
+              if componentDictionary.GetComponent(key).NeedSerialNumber then
+                for I := 0 to Task.ComponentBalanceDictionary[key].count - 1 do
+                begin
+                  AddComponentFrCB;
+                  TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).cbComponent.Text := key;
+                  cbComp(TComboBox(TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).Controls[3]));
+                  TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).eCount.Text := '1';
+                end
+              else
+              begin
+                AddComponentFrCB;
+                TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).cbComponent.Text := key;
+                cbComp(TComboBox(TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).Controls[3]));
+                TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).eCount.Text :=
+                  IntToStr(Task.ComponentBalanceDictionary[key].count);
+              end;
             end;
           end // end loop
         end;

@@ -48,18 +48,21 @@ begin
   lbSubTitle2.Caption := '';
   Show;
   Update;
+  // sleep(500)
 end;
 
 procedure TFormSplashScreen.Subtitle(Subtitle: String);
 begin
   lbSubTitle.Caption := Subtitle;
   Update;
+  // sleep(500);
 end;
 
 procedure TFormSplashScreen.SubTitle2(Subtitle: String);
 begin
   lbSubTitle2.Caption := Subtitle;
   Update;
+  // sleep(500);
 end;
 
 end.
