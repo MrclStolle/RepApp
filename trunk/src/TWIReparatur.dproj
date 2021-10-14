@@ -1,0 +1,564 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{52D6FC4D-10C7-4891-A4D5-913176CF4C9D}</ProjectGuid>
+			<MainSource>TWIReparatur.DPR</MainSource>
+			<Config Condition="'$(Config)'==''">Release</Config>
+			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+			<ProjectVersion>13.4</ProjectVersion>
+			<FrameworkType>VCL</FrameworkType>
+			<Base>True</Base>
+			<Platform Condition="'$(Platform)'==''">Win32</Platform>
+			<TargetedPlatforms>3</TargetedPlatforms>
+			<AppType>Application</AppType>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
+			<Base_Win64>true</Base_Win64>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+			<Base_Win32>true</Base_Win32>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+			<Cfg_1>true</Cfg_1>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win64)'!=''">
+			<Cfg_1_Win64>true</Cfg_1_Win64>
+			<CfgParent>Cfg_1</CfgParent>
+			<Cfg_1>true</Cfg_1>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
+			<Cfg_1_Win32>true</Cfg_1_Win32>
+			<CfgParent>Cfg_1</CfgParent>
+			<Cfg_1>true</Cfg_1>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+			<Cfg_2>true</Cfg_2>
+			<CfgParent>Base</CfgParent>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win64)'!=''">
+			<Cfg_2_Win64>true</Cfg_2_Win64>
+			<CfgParent>Cfg_2</CfgParent>
+			<Cfg_2>true</Cfg_2>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
+			<Cfg_2_Win32>true</Cfg_2_Win32>
+			<CfgParent>Cfg_2</CfgParent>
+			<Cfg_2>true</Cfg_2>
+			<Base>true</Base>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base)'!=''">
+			<VerInfo_Locale>1033</VerInfo_Locale>
+			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+			<DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
+			<DCC_ImageBase>00400000</DCC_ImageBase>
+			<DCC_SymbolReferenceInfo>1</DCC_SymbolReferenceInfo>
+			<DCC_DependencyCheckOutputName>SDIAPP.exe</DCC_DependencyCheckOutputName>
+			<DCC_Platform>x86</DCC_Platform>
+			<DCC_N>true</DCC_N>
+			<DCC_S>false</DCC_S>
+			<DCC_K>false</DCC_K>
+			<DCC_E>false</DCC_E>
+			<DCC_F>false</DCC_F>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base_Win64)'!=''">
+			<DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
+			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+			<Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Base_Win32)'!=''">
+			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+			<DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+			<Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1)'!=''">
+			<DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+			<DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+			<DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+			<DCC_DebugInformation>false</DCC_DebugInformation>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
+			<Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
+			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+			<DCC_Optimize>false</DCC_Optimize>
+			<Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
+			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2)'!=''">
+			<DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
+			<Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
+			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+		</PropertyGroup>
+		<PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+			<Icon_MainIcon>$(BDS)\bin\delphi_PROJECTICON.ico</Icon_MainIcon>
+			<DCC_UnitSearchPath>C:\Users\Stolle\Documents\RAD Studio\FastMM4-master\FastMM4-master;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+			<BCC_SourceDebuggingOn>true</BCC_SourceDebuggingOn>
+			<ILINK_FullDebugInfo>true</ILINK_FullDebugInfo>
+			<BCC_DebugLineNumbers>true</BCC_DebugLineNumbers>
+			<DCC_Optimize>false</DCC_Optimize>
+			<VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+			<DCC_MapFile>3</DCC_MapFile>
+			<DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
+		</PropertyGroup>
+		<ItemGroup>
+			<DelphiCompile Include="$(MainSource)">
+				<MainSource>MainSource</MainSource>
+			</DelphiCompile>
+			<DCCReference Include="Forms\FoRepAppMAIN.PAS">
+				<Form>RepApp</Form>
+			</DCCReference>
+			<DCCReference Include="Forms\FoCreateCustomer.pas">
+				<Form>FormCreateCustomer</Form>
+			</DCCReference>
+			<DCCReference Include="Forms\FoCreateTask.pas">
+				<Form>FormCreateTask</Form>
+			</DCCReference>
+			<DCCReference Include="Forms\FoComponentEditor.pas">
+				<Form>FormComponentEditor</Form>
+			</DCCReference>
+			<DCCReference Include="Forms\FoLogin.pas">
+				<Form>FormLogin</Form>
+			</DCCReference>
+			<DCCReference Include="Forms\FoCreateEmployee.pas">
+				<Form>FormCreateEmployee</Form>
+			</DCCReference>
+			<DCCReference Include="Units\UOracleDB.pas"/>
+			<DCCReference Include="Forms\FoCreateBooking.pas">
+				<Form>FormCreateBooking</Form>
+			</DCCReference>
+			<DCCReference Include="Forms\FoEditTask.pas">
+				<Form>FormEditTask</Form>
+			</DCCReference>
+			<DCCReference Include="Forms\FoShowBooking.pas">
+				<Form>ShowBooking</Form>
+			</DCCReference>
+			<DCCReference Include="Frames\FrBooking.pas">
+				<Form>FrameBooking</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="Frames\FrTask.pas">
+				<Form>FrameTask</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="Forms\FoTaskHistory.pas">
+				<Form>FormTaskHistory</Form>
+			</DCCReference>
+			<DCCReference Include="Frames\FrTaskHistory.pas">
+				<Form>FrameTaskHistory</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="Maintenance stuff\FoTransfer.pas">
+				<Form>FormTransfer</Form>
+			</DCCReference>
+			<DCCReference Include="StringSimilarity\uLevenshtein.pas"/>
+			<DCCReference Include="Forms\FoEditCustomer.pas">
+				<Form>FormEditCustomer</Form>
+			</DCCReference>
+			<DCCReference Include="Frames\FrSRNHistory.pas">
+				<Form>FrameSRNHistory</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="Forms\FoShowSRNHistory.pas">
+				<Form>FormShowSRNHistory</Form>
+			</DCCReference>
+			<DCCReference Include="Units\USettings.pas"/>
+			<DCCReference Include="Objects\UUser.pas"/>
+			<DCCReference Include="Frames\FrCompBox.pas">
+				<Form>FrameComponentBox</Form>
+				<DesignClass>TFrame</DesignClass>
+			</DCCReference>
+			<DCCReference Include="Units\moreUtils.pas"/>
+			<DCCReference Include="Forms\FoSearchSerNr.pas">
+				<Form>FormSearchSerNr</Form>
+			</DCCReference>
+			<DCCReference Include="Objects\UCustomer.pas"/>
+			<DCCReference Include="Objects\UComponent.pas"/>
+			<DCCReference Include="Objects\UTask.pas"/>
+			<DCCReference Include="Objects\UEmployee.pas"/>
+			<DCCReference Include="Objects\UBooking.pas"/>
+			<DCCReference Include="Forms\FoShowKomponentList.pas">
+				<Form>FoCompList</Form>
+			</DCCReference>
+			<DCCReference Include="Forms\FoTemplaceServiceMail.pas">
+				<Form>FormTemplateServMail</Form>
+			</DCCReference>
+			<DCCReference Include="Objects\UTaskStatus.pas"/>
+			<DCCReference Include="Objects\UComponentDictionary.pas"/>
+			<DCCReference Include="Objects\UCustomerDictionary.pas"/>
+			<DCCReference Include="Objects\UTaskDictionary.pas"/>
+			<DCCReference Include="Objects\UBookStatus.pas"/>
+			<DCCReference Include="Units\UReadTextAsTime.pas"/>
+			<DCCReference Include="Objects\UEmployeeDictionary.pas"/>
+			<DCCReference Include="Forms\FoSplashScreen.pas">
+				<Form>FormSplashScreen</Form>
+			</DCCReference>
+			<DCCReference Include="Objects\URepAppExcelWriter.pas"/>
+			<DCCReference Include="ImportXLS\ImportXLSToDB.pas"/>
+			<RcItem Include="images\WAIcon.png">
+				<ResourceType>RCDATA</ResourceType>
+				<ResourceId>PngImage_1</ResourceId>
+			</RcItem>
+			<RcItem Include="images\WEIcon.png">
+				<ResourceType>RCDATA</ResourceType>
+				<ResourceId>PngImage_2</ResourceId>
+			</RcItem>
+			<RcItem Include="images\bill.png">
+				<ResourceType>RCDATA</ResourceType>
+				<ResourceId>PngImage_3</ResourceId>
+			</RcItem>
+			<RcItem Include="images\ok.png">
+				<ResourceType>RCDATA</ResourceType>
+				<ResourceId>PngImage_4</ResourceId>
+			</RcItem>
+			<RcItem Include="images\arrowUp.png">
+				<ResourceType>RCDATA</ResourceType>
+				<ResourceId>PngImage_6</ResourceId>
+			</RcItem>
+			<RcItem Include="images\WAonewayIcon.png">
+				<ResourceType>RCDATA</ResourceType>
+				<ResourceId>PngImage_7</ResourceId>
+			</RcItem>
+			<RcItem Include="images\WEonewayIcon.png">
+				<ResourceType>RCDATA</ResourceType>
+				<ResourceId>PngImage_8</ResourceId>
+			</RcItem>
+			<RcItem Include="images\balancedIcon.png">
+				<ResourceType>RCDATA</ResourceType>
+				<ResourceId>PngImage_5</ResourceId>
+			</RcItem>
+			<RcItem Include="images\InOutIcon.png">
+				<ResourceType>RCDATA</ResourceType>
+				<ResourceId>PngImage_9</ResourceId>
+			</RcItem>
+			<None Include="ModelSupport_RepApplication\default.txvpck"/>
+			<None Include="ModelSupport_RepApplication\FoEditCustomer\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\UBookStatus\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\UTaskStatus\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\FoEditTask\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\FoCreateBooking\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\FoCreateEmployee\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\UTask\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\FoLogin\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\UBooking\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\FrBooking\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\FoShowSRNHistory\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\FoComponentEditor\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\UCustomer\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\UUser\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\USettings\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\FoTemplaceServiceMail\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\moreUtils\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\Sdiapp\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\FrTask\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\FoRepAppMAIN\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\FoShowKomponentList\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\FoSearchSerNr\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\FrCompBox\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\FrSRNHistory\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\UCustomerDictionary\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\FoCreateCustomer\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\uLevenshtein\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\FrTaskHistory\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\UComponent\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\UEmployee\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\UComponentDictionary\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\FoTaskHistory\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\UTaskDictionary\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\FoShowBooking\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\FoCreateTask\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\UOracleDB\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\FoTransfer\default.txaPackage"/>
+			<None Include="ModelSupport_RepApplication\Sdiapp\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\UBookStatus\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\UComponent\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\FoRepAppMAIN\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\FoTransfer\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\FrCompBox\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\UBooking\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\FrTaskHistory\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\USettings\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\FoShowBooking\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\FoCreateBooking\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\FoCreateTask\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\FoCreateCustomer\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\FoTaskHistory\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\FrBooking\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\UTaskDictionary\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\FoSearchSerNr\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\UComponentDictionary\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\UCustomerDictionary\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\uLevenshtein\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\FoShowKomponentList\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\FoEditTask\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\FoEditCustomer\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\UEmployee\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\FrSRNHistory\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\UCustomer\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\FoLogin\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\UTask\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\UTaskStatus\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\UOracleDB\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\FoShowSRNHistory\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\moreUtils\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\FoTemplaceServiceMail\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\FrTask\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\UUser\default.txvpck"/>
+			<None Include="ModelSupport_SDIAPP\FoCreateEmployee\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\UUser\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\UTaskStatus\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\UTaskDictionary\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\UTask\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\USettings\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\UOracleDB\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\uLevenshtein\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\UEmployee\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\UCustomerDictionary\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\UCustomer\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\UComponentDictionary\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\UComponent\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\UBookStatus\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\UBooking\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\moreUtils\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\FrTaskHistory\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\FrTask\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\FrSRNHistory\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\FrCompBox\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\FrBooking\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\FoTransfer\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\FoTemplaceServiceMail\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\FoTaskHistory\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\FoShowSRNHistory\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\FoShowKomponentList\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\FoShowBooking\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\FoSearchSerNr\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\FoRepAppMAIN\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\FoLogin\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\FoEditTask\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\FoEditCustomer\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\FoCreateTask\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\FoCreateEmployee\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\FoCreateCustomer\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\FoCreateBooking\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\FoComponentEditor\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\FoComponentEditor\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\FrCompBox\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\FrTask\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\FoSplashScreen\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\UTaskDictionary\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\FoCreateBooking\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\FrTaskHistory\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\USettings\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\UCustomerDictionary\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\UBookStatus\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\UTask\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\ImportXLSToDB\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\FoCreateTask\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\FoShowKomponentList\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\moreUtils\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\FoRepAppMAIN\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\FoCreateCustomer\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\FoCreateEmployee\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\FoSearchSerNr\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\UComponent\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\UCustomer\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\UTaskStatus\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\FoTaskHistory\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\UUser\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\UEmployeeDictionary\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\FoShowBooking\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\FoTemplaceServiceMail\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\FrBooking\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\UReadTextAsTime\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\URepAppExcelWriter\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\FrSRNHistory\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\FoTransfer\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\UBooking\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\uLevenshtein\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\FoEditCustomer\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\UEmployee\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\UComponentDictionary\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\FoShowSRNHistory\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\UOracleDB\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\FoLogin\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\FoEditTask\default.txvpck"/>
+			<None Include="ModelSupport_TWIReparatur\URepAppExcelWriter\default.txaPackage"/>
+			<None Include="ModelSupport_TWIReparatur\ImportXLSToDB\default.txaPackage"/>
+			<BuildConfiguration Include="Debug">
+				<Key>Cfg_2</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Base">
+				<Key>Base</Key>
+			</BuildConfiguration>
+			<BuildConfiguration Include="Release">
+				<Key>Cfg_1</Key>
+				<CfgParent>Base</CfgParent>
+			</BuildConfiguration>
+		</ItemGroup>
+		<Import Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')" Project="$(BDS)\Bin\CodeGear.Delphi.Targets"/>
+		<ProjectExtensions>
+			<Borland.Personality>Delphi.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Delphi.Personality>
+					<Source>
+						<Source Name="MainSource">TWIReparatur.DPR</Source>
+					</Source>
+					<Parameters>
+						<Parameters Name="UseLauncher">False</Parameters>
+						<Parameters Name="LoadAllSymbols">True</Parameters>
+						<Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+					</Parameters>
+					<VersionInfo>
+						<VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+						<VersionInfo Name="AutoIncBuild">False</VersionInfo>
+						<VersionInfo Name="MajorVer">1</VersionInfo>
+						<VersionInfo Name="MinorVer">0</VersionInfo>
+						<VersionInfo Name="Release">0</VersionInfo>
+						<VersionInfo Name="Build">0</VersionInfo>
+						<VersionInfo Name="Debug">False</VersionInfo>
+						<VersionInfo Name="PreRelease">False</VersionInfo>
+						<VersionInfo Name="Special">False</VersionInfo>
+						<VersionInfo Name="Private">False</VersionInfo>
+						<VersionInfo Name="DLL">False</VersionInfo>
+						<VersionInfo Name="Locale">1033</VersionInfo>
+						<VersionInfo Name="CodePage">1252</VersionInfo>
+					</VersionInfo>
+					<VersionInfoKeys>
+						<VersionInfoKeys Name="CompanyName"/>
+						<VersionInfoKeys Name="FileDescription"/>
+						<VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="InternalName"/>
+						<VersionInfoKeys Name="LegalCopyright"/>
+						<VersionInfoKeys Name="LegalTrademarks"/>
+						<VersionInfoKeys Name="OriginalFilename"/>
+						<VersionInfoKeys Name="ProductName"/>
+						<VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+						<VersionInfoKeys Name="Comments"/>
+					</VersionInfoKeys>
+					<Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dcloffice2k160.bpl">Microsoft Office 2000 Beispiele für gekapselte Komponenten für Automatisierungsserver</Excluded_Packages>
+						<Excluded_Packages Name="$(BDSBIN)\dclofficexp160.bpl">Microsoft Office XP Beispiele für gekapselte Komponenten für Automation Server</Excluded_Packages>
+					</Excluded_Packages>
+				</Delphi.Personality>
+				<Platforms>
+					<Platform value="Win64">True</Platform>
+					<Platform value="Win32">True</Platform>
+				</Platforms>
+				<ModelSupport>True</ModelSupport>
+				<Deployment>
+					<DeployFile Class="ProjectOutput" Configuration="Debug" LocalName="SDIAPP.exe">
+						<Platform Name="Win32"/>
+					</DeployFile>
+					<DeployFile Class="DebugSymbols" Configuration="Debug" LocalName="SDIAPP.rsm">
+						<Platform Name="Win32">
+							<RemoteName>SDIAPP.rsm</RemoteName>
+						</Platform>
+					</DeployFile>
+					<DeployClass Name="ProjectOutput" Required="true">
+						<Platform Name="OSX32">
+							<RemoteDir>Contents\MacOS</RemoteDir>
+							<Operation>1</Operation>
+						</Platform>
+						<Platform Name="Win32">
+							<Operation>0</Operation>
+						</Platform>
+					</DeployClass>
+					<DeployClass Name="DependencyPackage" Required="true">
+						<Platform Name="OSX32">
+							<RemoteDir>Contents\MacOS</RemoteDir>
+							<Operation>1</Operation>
+							<Extensions>.dylib</Extensions>
+						</Platform>
+						<Platform Name="Win32">
+							<Operation>0</Operation>
+							<Extensions>.bpl</Extensions>
+						</Platform>
+					</DeployClass>
+					<DeployClass Name="DependencyModule">
+						<Platform Name="OSX32">
+							<RemoteDir>Contents\MacOS</RemoteDir>
+							<Operation>1</Operation>
+							<Extensions>.dylib</Extensions>
+						</Platform>
+						<Platform Name="Win32">
+							<Operation>0</Operation>
+							<Extensions>.dll;.bpl</Extensions>
+						</Platform>
+					</DeployClass>
+					<DeployClass Name="ProjectOSXInfoPList">
+						<Platform Name="OSX32">
+							<RemoteDir>Contents</RemoteDir>
+							<Operation>1</Operation>
+						</Platform>
+					</DeployClass>
+					<DeployClass Name="File">
+						<Platform Name="OSX32">
+							<RemoteDir>Contents\MacOS</RemoteDir>
+							<Operation>0</Operation>
+						</Platform>
+						<Platform Name="Win32">
+							<Operation>0</Operation>
+						</Platform>
+					</DeployClass>
+					<DeployClass Name="DebugSymbols">
+						<Platform Name="OSX32">
+							<RemoteDir>Contents\MacOS</RemoteDir>
+							<Operation>1</Operation>
+						</Platform>
+						<Platform Name="Win32">
+							<Operation>0</Operation>
+						</Platform>
+					</DeployClass>
+					<DeployClass Name="DependencyFramework">
+						<Platform Name="OSX32">
+							<RemoteDir>Contents\MacOS</RemoteDir>
+							<Operation>1</Operation>
+							<Extensions>.framework</Extensions>
+						</Platform>
+						<Platform Name="Win32">
+							<Operation>0</Operation>
+						</Platform>
+					</DeployClass>
+					<DeployClass Name="AdditionalDebugSymbols">
+						<Platform Name="OSX32">
+							<RemoteDir>Contents\MacOS</RemoteDir>
+							<Operation>1</Operation>
+						</Platform>
+						<Platform Name="Win32">
+							<Operation>0</Operation>
+						</Platform>
+					</DeployClass>
+					<DeployClass Name="ProjectOSXResource">
+						<Platform Name="OSX32">
+							<RemoteDir>Contents\Resources</RemoteDir>
+							<Operation>1</Operation>
+						</Platform>
+					</DeployClass>
+					<ProjectRoot Name="$(PROJECTNAME).app" Platform="OSX32"/>
+					<ProjectRoot Name="$(PROJECTNAME)" Platform="Win64"/>
+					<ProjectRoot Name="$(PROJECTNAME)" Platform="Win32"/>
+				</Deployment>
+			</BorlandProject>
+			<ProjectFileVersion>12</ProjectFileVersion>
+		</ProjectExtensions>
+		<Import Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')" Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj"/>
+		<Import Condition="Exists('$(MSBuildProjectName).deployproj')" Project="$(MSBuildProjectName).deployproj"/>
+	</Project>
