@@ -69,7 +69,7 @@ object FormCreateBooking: TFormCreateBooking
   end
   object lbTitleErrorSerNr: TLabel
     Left = 49
-    Top = 557
+    Top = 566
     Width = 209
     Height = 32
     Caption = 
@@ -83,6 +83,20 @@ object FormCreateBooking: TFormCreateBooking
     ParentFont = False
     Visible = False
     WordWrap = True
+  end
+  object lbZahlRueckstand: TLabel
+    Left = 21
+    Top = 513
+    Width = 186
+    Height = 16
+    Caption = 'Zahlungsr'#252'ckstand, WA gesperrt'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    Visible = False
   end
   object btAddOneGroup: TButton
     Left = 344
@@ -508,8 +522,8 @@ object FormCreateBooking: TFormCreateBooking
     end
   end
   object btok: TButton
-    Left = 63
-    Top = 526
+    Left = 54
+    Top = 535
     Width = 75
     Height = 25
     Caption = 'Erstellen'
@@ -524,8 +538,8 @@ object FormCreateBooking: TFormCreateBooking
     OnClick = btokClick
   end
   object btAbort: TButton
-    Left = 166
-    Top = 526
+    Left = 181
+    Top = 535
     Width = 75
     Height = 25
     Cancel = True
@@ -558,7 +572,7 @@ object FormCreateBooking: TFormCreateBooking
   end
   object pnlTaskMemo: TPanel
     Left = 35
-    Top = 611
+    Top = 620
     Width = 251
     Height = 159
     Anchors = [akLeft, akTop, akBottom]

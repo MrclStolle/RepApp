@@ -59,9 +59,9 @@ begin
   cbStatus.Items.Add('Offen');
   cbStatus.itemindex := StrToInt(Task.Status.TaskStatusNr);
 
-  cbBillStatus.Items.Add('Rechnung Gestellt');
-  cbBillStatus.Items.Add('Rechnung Offen');
-  cbBillStatus.Items.Add('Rechnung Prüfen');
+  cbBillStatus.Items.Add('Rechnung wurde gestellt');
+  cbBillStatus.Items.Add('Rechnung muss gestellt werden');
+  cbBillStatus.Items.Add('Rechnungsstatus unklar');
   cbBillStatus.itemindex := StrToInt(Task.Status.BillStatusNr);
 
   if Task.Status.BillStatusNr = '3' then

@@ -174,7 +174,7 @@ object FormCreateTask: TFormCreateTask
     object cbBillStatus: TComboBox
       Left = 16
       Top = 103
-      Width = 201
+      Width = 224
       Height = 24
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText

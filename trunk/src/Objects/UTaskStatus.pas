@@ -86,7 +86,7 @@ begin
     RechnOffen:
       Result := 'Rechnung muss gestellt werden';
     pruefen:
-      Result := 'Rechnung unklar';
+      Result := 'Rechnungsstatus unklar';
     fullService:
       Result := 'Full Service';
   end;

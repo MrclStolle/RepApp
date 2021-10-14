@@ -175,7 +175,7 @@ object FormEditTask: TFormEditTask
     object cbStatus: TComboBox
       Left = 17
       Top = 104
-      Width = 201
+      Width = 216
       Height = 24
       Hint = 'Status des Auftrags'
       Font.Charset = DEFAULT_CHARSET
@@ -211,7 +211,7 @@ object FormEditTask: TFormEditTask
     object cbBillStatus: TComboBox
       Left = 17
       Top = 156
-      Width = 201
+      Width = 216
       Height = 24
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText

@@ -91,20 +91,23 @@ var
   LPoint: TPoint;
 begin
   inherited;
-  LPoint := ScrollBoxHistory.ClientToScreen(Point(0, 0));
-
-  LTopLeft := LPoint.X;
-  LTopRight := LTopLeft + ScrollBoxHistory.Width;
-
-  LBottomLeft := LPoint.Y;
-  LBottomRight := LBottomLeft + ScrollBoxHistory.Width;
-
-  if (MousePos.X >= LTopLeft) and (MousePos.X <= LTopRight) and (MousePos.Y >= LBottomLeft) and
-    (MousePos.Y <= LBottomRight) then
+  if ScrollBoxHistory <> nil then
   begin
-    ScrollBoxHistory.VertScrollBar.Position := ScrollBoxHistory.VertScrollBar.Position - WheelDelta;
+    LPoint := ScrollBoxHistory.ClientToScreen(Point(0, 0));
 
-    Handled := true;
+    LTopLeft := LPoint.X;
+    LTopRight := LTopLeft + ScrollBoxHistory.Width;
+
+    LBottomLeft := LPoint.Y;
+    LBottomRight := LBottomLeft + ScrollBoxHistory.Width;
+
+    if (MousePos.X >= LTopLeft) and (MousePos.X <= LTopRight) and (MousePos.Y >= LBottomLeft) and
+      (MousePos.Y <= LBottomRight) then
+    begin
+      ScrollBoxHistory.VertScrollBar.Position := ScrollBoxHistory.VertScrollBar.Position - WheelDelta;
+
+      Handled := true;
+    end;
   end;
 
 end;
@@ -113,8 +116,9 @@ procedure TFormTaskHistory.FormResize(Sender: TObject);
 var
   I: Integer;
 begin
-  for I := 0 to ScrollBoxHistory.ControlCount - 1 do
-    TFrameTaskHistory(ScrollBoxHistory.Controls[I]).Width := ScrollBoxHistory.Width;
+  if ScrollBoxHistory <> nil then
+    for I := 0 to ScrollBoxHistory.ControlCount - 1 do
+      TFrameTaskHistory(ScrollBoxHistory.Controls[I]).Width := ScrollBoxHistory.Width;
 
 end;
 

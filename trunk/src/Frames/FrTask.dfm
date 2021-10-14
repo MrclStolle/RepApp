@@ -132,12 +132,12 @@ object FrameTask: TFrameTask
   object lbZahlrueckstand: TLabel
     Left = 527
     Top = 26
-    Width = 90
-    Height = 13
-    Caption = 'Zahlungsr'#252'ckstand'
+    Width = 110
+    Height = 16
+    Caption = 'Zahlungsr'#252'ckstand!'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clRed
-    Font.Height = -11
+    Font.Height = -13
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False

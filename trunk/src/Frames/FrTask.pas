@@ -24,10 +24,10 @@ type
     imgTaskStatus: TImage;
     imgBillStatus: TImage;
     lbBillStatus: TLabel;
-    lbZahlrueckstand: TLabel;
     btAddBooking: TBitBtn;
     btEditTask: TBitBtn;
     btHistory: TBitBtn;
+    lbZahlrueckstand: TLabel;
 
     procedure btAddBookingClick(Sender: TObject);
     procedure btEditTaskClick(Sender: TObject);
@@ -81,12 +81,7 @@ begin
   lbTaskID.Caption := lbTaskID.Caption + TaskID;
 
   if Task.GetCustomer.Zahlrueckstand then
-  begin
-    btAddBooking.Enabled := false;
     lbZahlrueckstand.Show;
-    // btAddBooking.hint := 'Kunde hat zu viele Zahlungsrückstände. Buchungen erstellen ist derzeit deaktiviert';
-    // nicht sichtbar, wenn button disabled
-  end;
 
   if Task.Status.TaskStatusNr = '0' then // disable add-Bookings_button on closed tasks, because Task is closed
   begin

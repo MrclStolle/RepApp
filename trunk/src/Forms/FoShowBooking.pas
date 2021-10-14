@@ -60,7 +60,7 @@ begin
   self.Booking := Booking;
   lbBookingType.Caption := BookingTypeArray[Booking.bookTypeID];
   lbDate.Caption := FormatDateTime('dd.mm.yyyy', Booking.date);
-  Caption := Caption + '   ' + FormatDateTime('dd.mm.yyyy', Booking.date);
+  Caption := Caption + ' PosID:' + Booking.Book_PosID + '  ' + FormatDateTime('dd.mm.yyyy', Booking.date);
   etPackageID.Text := Booking.packageID;
   if etPackageID.Text = '' then
     etPackageID.Enabled := false;

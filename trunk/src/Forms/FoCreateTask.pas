@@ -61,10 +61,9 @@ procedure TFormCreateTask.FormCreate(Sender: TObject);
 begin
   memBeschreibung.Lines.Clear;
 
-  cbBillStatus.Items.Add('Rechnung Gestellt');
-
-  cbBillStatus.Items.Add('Rechnung Offen');
-  cbBillStatus.Items.Add('Rechnung Prüfen');
+  cbBillStatus.Items.Add('Rechnung wurde gestellt');
+  cbBillStatus.Items.Add('Rechnung muss gestellt werden');
+  cbBillStatus.Items.Add('Rechnungsstatus unklar');
   cbBillStatus.ItemIndex := 1;
 
   // fill Status-ComboBox
@@ -76,8 +75,8 @@ begin
   if Customer <> nil then
   begin
     cbCustomerChoise.Text := Customer.name;
-    btCreateTaskWBooking.Enabled := not Customer.Zahlrueckstand;
-    lbErrorNoBooking.Visible := Customer.Zahlrueckstand;
+//    btCreateTaskWBooking.Enabled := not Customer.Zahlrueckstand;
+//    lbErrorNoBooking.Visible := Customer.Zahlrueckstand;
     if Customer.FullService then
     begin
       cbBillStatus.Items.Add('Full Service');

@@ -8,7 +8,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ComCtrls, UOracleDB,
   oracle, Vcl.Imaging.pngimage, Vcl.ExtCtrls, FoComponentEditor, Vcl.Grids,
   uLevenshtein, System.StrUtils, FrCompBox, UTask, moreUtils, FoTemplaceServiceMail, UComponentDictionary,
-  UTaskDictionary, UUser;
+  UTaskDictionary, UCustomerDictionary, UUser;
 
 type
   TFormCreateBooking = class(TForm)
@@ -51,6 +51,7 @@ type
     pnlTaskMemo: TPanel;
     lbTaskMemo: TLabel;
     memTaskMemo: TMemo;
+    lbZahlRueckstand: TLabel;
 
     procedure btAbortClick(Sender: TObject);
     procedure btAddGroupsClick(Sender: TObject);
@@ -185,6 +186,8 @@ begin
   with Sender as TComboBox do
     if (ItemIndex = 0) or (ItemIndex = 2) then
     begin
+      lbZahlRueckstand.hide;
+      btok.enabled := true;
       // Image1.Picture.LoadFromFile(ExtractFilePath(Application.ExeName) + '\images\WEIcon.png');
       RepApp.imgLBookTypeID.GetIcon(0, Image1.Picture.Icon);
       if Task <> nil then
@@ -217,6 +220,11 @@ begin
     end
     else // if item index is 1 or 3
     begin
+      if CustomerDictionary.GetCustomer(tempCustomerName).Zahlrueckstand then
+      begin
+        lbZahlRueckstand.Show;
+        btok.enabled := false;
+      end;
       // Image1.Picture.LoadFromFile(ExtractFilePath(Application.ExeName) + '\images\WAIcon.png');
       RepApp.imgLBookTypeID.GetIcon(1, Image1.Picture.Icon);
       if Task <> nil then
