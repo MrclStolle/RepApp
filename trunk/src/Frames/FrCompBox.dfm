@@ -98,7 +98,6 @@ object FrameComponentBox: TFrameComponentBox
     Top = 78
     Width = 143
     Height = 24
-    AutoDropDown = True
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13

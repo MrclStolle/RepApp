@@ -4,9 +4,9 @@ object FormLogin: TFormLogin
   AutoSize = True
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
-  Caption = 'Nutzer Login'
-  ClientHeight = 362
-  ClientWidth = 554
+  Caption = 'Login'
+  ClientHeight = 331
+  ClientWidth = 709
   Color = clGradientInactiveCaption
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,13 +18,13 @@ object FormLogin: TFormLogin
   Padding.Right = 15
   Padding.Bottom = 15
   OldCreateOrder = False
-  Position = poDesktopCenter
+  Position = poMainFormCenter
   OnKeyPress = FormKeyPress
   PixelsPerInch = 96
   TextHeight = 13
   object lbTitleInfo: TLabel
     Left = 18
-    Top = 279
+    Top = 248
     Width = 234
     Height = 68
     AutoSize = False
@@ -40,7 +40,7 @@ object FormLogin: TFormLogin
     WordWrap = True
   end
   object btChangeLogon: TButton
-    Left = 90
+    Left = 282
     Top = 15
     Width = 150
     Height = 25
@@ -56,7 +56,7 @@ object FormLogin: TFormLogin
   end
   object pnlLogIn: TPanel
     Left = 15
-    Top = 46
+    Top = 15
     Width = 248
     Height = 227
     Font.Charset = DEFAULT_CHARSET
@@ -176,8 +176,8 @@ object FormLogin: TFormLogin
     end
   end
   object pnlChangeDB: TPanel
-    Left = 297
-    Top = 46
+    Left = 452
+    Top = 15
     Width = 242
     Height = 275
     Font.Charset = DEFAULT_CHARSET
@@ -262,6 +262,44 @@ object FormLogin: TFormLogin
       Enabled = False
       TabOrder = 4
       OnClick = btSaveConnClick
+    end
+  end
+  object Panel1: TPanel
+    Left = 282
+    Top = 69
+    Width = 151
+    Height = 107
+    AutoSize = True
+    Padding.Left = 15
+    Padding.Top = 15
+    Padding.Right = 15
+    Padding.Bottom = 15
+    TabOrder = 3
+    Visible = False
+    object Label3: TLabel
+      Left = 18
+      Top = 16
+      Width = 77
+      Height = 13
+      Caption = 'Verbinden mit...'
+    end
+    object btTestDB: TButton
+      Left = 16
+      Top = 66
+      Width = 119
+      Height = 25
+      Caption = 'Test-Datenbank(fehler)'
+      TabOrder = 0
+      OnClick = btTestDBClick
+    end
+    object btOffDB: TButton
+      Left = 16
+      Top = 35
+      Width = 119
+      Height = 25
+      Caption = 'Offizieller-Datenbank'
+      TabOrder = 1
+      OnClick = btOffDBClick
     end
   end
 end

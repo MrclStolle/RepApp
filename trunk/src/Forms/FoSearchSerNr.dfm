@@ -16,7 +16,7 @@ object FormSearchSerNr: TFormSearchSerNr
   Padding.Right = 15
   Padding.Bottom = 15
   OldCreateOrder = False
-  Position = poDesktopCenter
+  Position = poMainFormCenter
   OnKeyPress = FormKeyPress
   DesignSize = (
     423

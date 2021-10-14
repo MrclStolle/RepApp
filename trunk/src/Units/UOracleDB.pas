@@ -330,12 +330,15 @@ end;
 procedure CreateConnection(DBName, DBUser, DBPW: String);
 begin
   try
-    OracleQuery := TOracleQuery.Create(nil);
-    OracleQuery.session := TOracleSession.Create(nil);
+    if OracleQuery = nil then
+    begin
+      OracleQuery := TOracleQuery.Create(nil);
+      OracleQuery.session := TOracleSession.Create(nil);
+    end;
     SetCurrentSession(DBName, DBUser, DBPW);
 
     OracleQuery.session.LogOn;
-    connectedTo := 'Verbunden mit ' + DBName;
+
   except
     on E: EOracleError do
       ShowMessage(E.toString);
@@ -370,13 +373,13 @@ begin
 
     try
       SplashScreen.Subtitle('Logging on');
-      SplashScreen.SubTitle2(DBName);
+      SplashScreen.SubTitle2(UserName + '@' + DBName);
       oraTestQuerry.session.LogOn;
       Result := true;
     except
       on E: EOracleError do
       begin
-        ShowMessage(E.toString + ' <Verbindungsaufbau mit ' + DBName + ' Fehlgeschlagen>');
+        ShowMessage(E.toString + ' <Verbindungsaufbau mit ' + UserName + '@' + DBName + ' Fehlgeschlagen>');
         Result := false;
         if SplashScreen <> nil then
         begin
@@ -387,9 +390,7 @@ begin
     end;
   finally
     if SplashScreen <> nil then
-    begin
       SplashScreen.free;
-    end;
     if oraTestQuerry.session <> nil then
       oraTestQuerry.session.free;
     if oraTestQuerry <> nil then

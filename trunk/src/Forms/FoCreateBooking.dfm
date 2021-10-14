@@ -13,7 +13,7 @@ object FormCreateBooking: TFormCreateBooking
   Font.Style = []
   KeyPreview = True
   OldCreateOrder = False
-  Position = poDesktopCenter
+  Position = poMainFormCenter
   ShowHint = True
   OnCreate = FormCreate
   OnMouseWheel = FormMouseWheel

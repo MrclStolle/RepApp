@@ -27,6 +27,7 @@ type
     procedure btAbortClick(Sender: TObject);
     procedure btOKClick(Sender: TObject);
 
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   public
     { Public-Deklarationen }
 
@@ -65,7 +66,7 @@ begin
 
   if Task.Status.BillStatusNr = '3' then
   begin
-    cbBillStatus.Enabled := false;
+    // cbBillStatus.Enabled := false;
     cbBillStatus.Items.Add('Full Service');
     cbBillStatus.itemindex := 3;
   end;
@@ -103,6 +104,11 @@ begin
     ModalResult := mrOK;
   end
 
+end;
+
+procedure TFormEditTask.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  ReleaseTaskRow(Task.ID);
 end;
 
 end.

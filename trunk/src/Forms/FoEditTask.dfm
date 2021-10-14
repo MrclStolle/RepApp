@@ -16,7 +16,8 @@ object FormEditTask: TFormEditTask
   Padding.Right = 15
   Padding.Bottom = 15
   OldCreateOrder = False
-  Position = poDesktopCenter
+  Position = poMainFormCenter
+  OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
   object lbTitle: TLabel

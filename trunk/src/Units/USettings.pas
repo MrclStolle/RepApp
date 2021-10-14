@@ -15,7 +15,7 @@ procedure GetLastUser(var User: TUser);
 /// </returns>
 function Encode(str: string): string;
 
-procedure SafeConnection(DBName, UserName, pw: string); overload;
+procedure SaveConnection(DBName, UserName, pw: string); overload;
 
 /// <summary>rückstand in früherer programmierung, switch fürs anzeigen einer User Login auswahl
 /// </summary>
@@ -28,6 +28,8 @@ function GetNamesEarly: boolean;
 /// </returns>
 function LoadLastConnection(): boolean;
 procedure InitialiseSettings;
+function TryConnectionToOfficialDB: boolean;
+function TryConnectionToTestDB: boolean;
 
 procedure FinalizeSettings;
 
@@ -57,30 +59,33 @@ begin
   appIniUserLogin := TIniFile.Create(appIniUserLoginPath);
 
   // definiert den Pfad der letzten Datenbankverbindung
-  if debugmode then
-    appIniPathDBCon := ChangeFileExt(Application.ExeName, 'DEBUG.ini')
-  else
-    appIniPathDBCon := ChangeFileExt(Application.ExeName, '.ini');
+  // if debugmode then
+  // appIniPathDBCon := ChangeFileExt(Application.ExeName, 'DEBUG.ini')
+  // else
+  appIniPathDBCon := ChangeFileExt(Application.ExeName, '.ini');
   appIniDBCon := TIniFile.Create(appIniPathDBCon);
 
-  // default connection
-  defaultDBName := '192.168.1.113/topdb';
-  defaultUserName := 'reparatur';
-  defaultPW := 'twi';
+//  TryConnectionToOfficialDB;
 
-  if not LoadLastConnection then
-  begin
-    // showmessage('Zu ' + DBName + ' konnte keine Verbindung aufgebaut werden. Versuche mit ' + defaultDBName +
-    // ' zu verbinden.');
-    if TestConnection(defaultDBName, defaultUserName, defaultPW) then
-    begin
-      CreateConnection(defaultDBName, defaultUserName, defaultPW);
-      if debugmode then
-        showmessage('Verindung zur öffentlichen Datenbank Hergestellt! Vorsicht mit den Daten!');
-    end
-    else
-      // showmessage('Zu ' + defaultDBName + ' konnte ebenfalls keine Verbindung aufgebaut werden.');
-  end;
+  // default connection, offizielle Datenbank
+   defaultDBName := '192.168.1.113/topdb';
+   defaultUserName := 'reparatur';
+   defaultPW := 'twi';
+
+   if not LoadLastConnection then
+   begin
+   // showmessage('Zu ' + DBName + ' konnte keine Verbindung aufgebaut werden. Versuche mit ' + defaultDBName +
+   // ' zu verbinden.');
+   if TestConnection(defaultDBName, defaultUserName, defaultPW) then
+   begin
+   CreateConnection(defaultDBName, defaultUserName, defaultPW);
+   connectedTo := 'Verbunden mit ' + defaultUserName + '@' + defaultDBName;
+   if debugmode then
+   showmessage('Verindung zur öffentlichen Datenbank Hergestellt! Vorsicht mit den Daten!');
+   end
+   else
+   // showmessage('Zu ' + defaultDBName + ' konnte ebenfalls keine Verbindung aufgebaut werden.');
+   end;
 
 end;
 
@@ -103,7 +108,7 @@ begin
 
   if User.rememberPW then
   begin
-    appIniUserLogin.WriteString('User', 'LastPW', Encode(User.pw));
+    appIniUserLogin.WriteString('User', 'LastPW', User.pw);
     appIniUserLogin.WriteString('User', 'RemPW', 'true');
   end
   else
@@ -116,8 +121,7 @@ end;
 procedure GetLastUser(var User: TUser);
 begin
   User := TUser.Create(appIniUserLogin.ReadString('User', 'LastID', ''), appIniUserLogin.ReadString('User', 'LastName',
-    ''), appIniUserLogin.ReadString('User', 'LastNameShort', ''),
-    Encode(appIniUserLogin.ReadString('User', 'LastPW', '')),
+    ''), appIniUserLogin.ReadString('User', 'LastNameShort', ''), appIniUserLogin.ReadString('User', 'LastPW', ''),
     StrToBool(appIniUserLogin.ReadString('User', 'RemMe', 'true')),
     StrToBool(appIniUserLogin.ReadString('User', 'RemPW', 'false')), false);
 end;
@@ -136,11 +140,11 @@ begin
   Result := str;
 end;
 
-procedure SafeConnection(DBName, UserName, pw: string);
+procedure SaveConnection(DBName, UserName, pw: string);
 begin
-  appIniDBCon.WriteString('connection', 'DBName', DBName);
-  appIniDBCon.WriteString('connection', 'Username', UserName);
-  appIniDBCon.WriteString('connection', 'pw', Encode(pw));
+  appIniDBCon.WriteString('connectionLast', 'DBName', DBName);
+  appIniDBCon.WriteString('connectionLast', 'Username', UserName);
+  appIniDBCon.WriteString('connectionLast', 'pw', pw);
 end;
 
 function GetNamesEarly: boolean;
@@ -155,14 +159,46 @@ begin
   Result := false;
   DBName := appIniDBCon.ReadString('connection', 'DBName', '');
   UserName := appIniDBCon.ReadString('connection', 'Username', '');
-  DBPW := Encode(appIniDBCon.ReadString('connection', 'pw', ''));
+  DBPW := appIniDBCon.ReadString('connection', 'pw', '');
   if DBName <> '' then
     if TestConnection(DBName, UserName, DBPW) then
     begin
       CreateConnection(DBName, UserName, DBPW);
+      connectedTo := 'Verbunden mit ' + UserName + '@' + DBName;
       Result := true;
     end;
+end;
 
+function TryConnectionToTestDB: boolean;
+var
+  DBnameTest, DBuserTest, DBpwTest: String;
+begin
+  DBnameTest := appIniDBCon.ReadString('connectionTestDB', 'DBName', '');
+  DBuserTest := appIniDBCon.ReadString('connectionTestDB', 'Username', '');
+  DBpwTest := appIniDBCon.ReadString('connectionTestDB', 'pw', '');
+
+  Result := TestConnection(DBnameTest, DBuserTest, DBpwTest);
+  if Result then
+  begin
+    CreateConnection(DBnameTest, DBuserTest, DBpwTest);
+    connectedTo := 'Verbunden mit ' + DBuserTest + '@' + DBnameTest;
+  end;
+end;
+
+function TryConnectionToOfficialDB: boolean;
+var
+  DBnameoff, DBuseroff, DBpwoff: String;
+begin
+  DBnameoff := appIniDBCon.ReadString('connectionOffDB', 'DBName', '');
+  DBuseroff := appIniDBCon.ReadString('connectionOffDB', 'Username', '');
+  DBpwoff := appIniDBCon.ReadString('connectionOffDB', 'pw', '');
+
+  Result := TestConnection(DBnameoff, DBuseroff, DBpwoff);
+  if Result then
+  begin
+    CreateConnection(DBnameoff, DBuseroff, DBpwoff);
+    connectedTo := 'Verbunden mit ' + DBuseroff + '@' + DBnameoff;
+  end;
 end;
 
 procedure FinalizeSettings;

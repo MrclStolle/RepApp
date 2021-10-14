@@ -11,7 +11,7 @@ object FormSplashScreen: TFormSplashScreen
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poScreenCenter
+  Position = poMainFormCenter
   PixelsPerInch = 96
   TextHeight = 13
   object lbTitle: TLabel

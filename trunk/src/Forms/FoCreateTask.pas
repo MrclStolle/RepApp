@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, FoCreateCustomer,
-  UOracleDB, UCustomer, FoCreateBooking, moreUtils, Vcl.ExtCtrls, UCustomerDictionary, UUSer;
+  UOracleDB, UCustomer, FoCreateBooking, moreUtils, Vcl.ExtCtrls, UCustomerDictionary, UUSer, UTaskStatus;
 
 type
   TFormCreateTask = class(TForm)
@@ -62,6 +62,7 @@ begin
   memBeschreibung.Lines.Clear;
 
   cbBillStatus.Items.Add('Rechnung Gestellt');
+
   cbBillStatus.Items.Add('Rechnung Offen');
   cbBillStatus.Items.Add('Rechnung Prüfen');
   cbBillStatus.ItemIndex := 1;

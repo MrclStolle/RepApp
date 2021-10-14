@@ -11,7 +11,7 @@ object FormCreateCustomer: TFormCreateCustomer
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poDesktopCenter
+  Position = poMainFormCenter
   OnKeyPress = FormKeyPress
   PixelsPerInch = 96
   TextHeight = 13

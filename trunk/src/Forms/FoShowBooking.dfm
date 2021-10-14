@@ -15,7 +15,7 @@ object ShowBooking: TShowBooking
   Padding.Right = 15
   Padding.Bottom = 15
   OldCreateOrder = False
-  Position = poDesktopCenter
+  Position = poMainFormCenter
   ShowHint = True
   PixelsPerInch = 96
   TextHeight = 13

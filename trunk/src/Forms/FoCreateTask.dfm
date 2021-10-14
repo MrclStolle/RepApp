@@ -16,7 +16,7 @@ object FormCreateTask: TFormCreateTask
   Padding.Right = 20
   Padding.Bottom = 20
   OldCreateOrder = False
-  Position = poDesktopCenter
+  Position = poMainFormCenter
   ShowHint = True
   OnCreate = FormCreate
   OnKeyPress = FormKeyPress

@@ -17,7 +17,7 @@ object FormCreateEmployee: TFormCreateEmployee
   Padding.Right = 15
   Padding.Bottom = 15
   OldCreateOrder = False
-  Position = poDesktopCenter
+  Position = poMainFormCenter
   OnCreate = FormCreate
   OnKeyPress = FormKeyPress
   PixelsPerInch = 96

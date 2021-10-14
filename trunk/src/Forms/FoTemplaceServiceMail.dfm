@@ -11,6 +11,7 @@ object FormTemplateServMail: TFormTemplateServMail
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poMainFormCenter
   OnKeyPress = FormKeyPress
   DesignSize = (
     775
@@ -57,7 +58,6 @@ object FormTemplateServMail: TFormTemplateServMail
     ParentFont = False
     TabOrder = 0
     OnKeyPress = FormKeyPress
-    ExplicitWidth = 481
   end
   object MemBody: TMemo
     Left = 32
@@ -75,6 +75,5 @@ object FormTemplateServMail: TFormTemplateServMail
     ParentFont = False
     TabOrder = 1
     OnKeyPress = FormKeyPress
-    ExplicitWidth = 481
   end
 end

@@ -14,10 +14,11 @@ type
   TStatus = record
 
   private
-    WareStatus: TWareStatus;
-    BillStatus: TBillStatus;
+
   public
     TaskStatus: TTaskStatus;
+    WareStatus: TWareStatus;
+    BillStatus: TBillStatus;
     constructor Create(PTaskStatus, PWareStatus, PBillStatus: Integer); overload;
     constructor Create(PTaskStatus: TTaskStatus; PWareStatus: TWareStatus; PBillStatus: TBillStatus); overload;
     function BillStatusString: string;
@@ -81,11 +82,11 @@ function TStatus.BillStatusString: string;
 begin
   case BillStatus of
     gezahlt:
-      Result := 'Rechnung Gestellt';
+      Result := 'Rechnung wurde gestellt';
     RechnOffen:
-      Result := 'Rechnung Offen';
+      Result := 'Rechnung muss gestellt werden';
     pruefen:
-      Result := 'Rechnung Prüfen';
+      Result := 'Rechnung unklar';
     fullService:
       Result := 'Full Service';
   end;

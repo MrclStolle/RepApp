@@ -33,6 +33,10 @@ type
     btSaveConn: TButton;
     Label1: TLabel;
     Label2: TLabel;
+    Panel1: TPanel;
+    btTestDB: TButton;
+    btOffDB: TButton;
+    Label3: TLabel;
 
     procedure btConnectClick(Sender: TObject);
     procedure bt_AbortClick(Sender: TObject);
@@ -40,8 +44,10 @@ type
     procedure FormKeyPress(Sender: TObject; var Key: Char);
     procedure btChangeLogonClick(Sender: TObject);
     procedure bt_LoginClick(Sender: TObject);
+    procedure btOffDBClick(Sender: TObject);
     procedure btSaveConnClick(Sender: TObject);
     procedure etOnChange(Sender: TObject);
+    procedure btTestDBClick(Sender: TObject);
   private
 
     { Private-Deklarationen }
@@ -69,6 +75,7 @@ begin
   inherited Create(AOwner);
   if SessionConnected then // if connection is established
   begin
+    Caption := Caption + ' ' + connectedTo;
     LastUser := nil;
 
     if User = nil then // wenn bisher kein User eingeloggt ist
@@ -144,7 +151,7 @@ end;
 procedure TFormLogin.btSaveConnClick(Sender: TObject);
 begin
   SetCurrentSession(etServName.Text, etUserName.Text, etUserPW.Text);
-  SafeConnection(etServName.Text, etUserName.Text, etUserPW.Text);
+  SaveConnection(etServName.Text, etUserName.Text, etUserPW.Text);
   bt_Login.Enabled := true;
   btSaveConn.Enabled := false;
   RepApp.RefreshTaskTables;
@@ -189,6 +196,18 @@ begin
     tempTable.Free;
   end;
 
+end;
+
+procedure TFormLogin.btTestDBClick(Sender: TObject);
+begin
+  if TryConnectionToTestDB then
+    Caption := 'Login ' + connectedTo;
+end;
+
+procedure TFormLogin.btOffDBClick(Sender: TObject);
+begin
+  if TryConnectionToOfficialDB then
+    Caption := 'Login ' + connectedTo;
 end;
 
 // to change names fast

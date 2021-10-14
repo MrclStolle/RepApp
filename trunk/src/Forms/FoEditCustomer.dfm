@@ -15,7 +15,7 @@ object FormEditCustomer: TFormEditCustomer
   Padding.Right = 25
   Padding.Bottom = 25
   OldCreateOrder = False
-  Position = poDesktopCenter
+  Position = poMainFormCenter
   ShowHint = True
   PixelsPerInch = 96
   TextHeight = 13

@@ -245,6 +245,7 @@ begin
   begin
     SetCurrentUser;
     SetStatusBar('Benutzer gewechselt');
+    // RefreshTaskTables;
   end;
   // LoginForm.free;
 end;
@@ -565,6 +566,7 @@ begin
           lbCustomerTitle.Font.Height := -31;
           // color := FrTask.AssignColor;
           lbCustomerTitle.Caption := TaskDictionary.GetCustomer(TaskID).Name;
+          lbCustomerTitle.Font.Name := 'Arial';
           lbCustomerTitle.OnClick := lbOnClick;
           lbCustomerTitle.Cursor := crHandPoint;
           // lbCustomerTitle.Show;
