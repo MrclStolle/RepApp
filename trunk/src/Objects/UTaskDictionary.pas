@@ -244,8 +244,8 @@ begin
       Task.Status.SetWareStatus(NewWareStatus);
 
       // insert change into AuftrProtokoll from local
-      InsertIntoAuftrProt(Task.ID, User.ID, Task.Status.TaskStatusNr, FormatDateTime('dd-mm-yy', now),
-        floattostr(Task.Hours), Task.Kommentar, Task.Status.WareStatusNr, Task.Status.BillStatusNr);
+      InsertIntoAuftrProt(Task.ID, User.ID, Task.Status.TaskStatusNr, floattostr(Task.Hours),
+        Task.Kommentar, Task.Status.WareStatusNr, Task.Status.BillStatusNr);
 
       Result := true;
     end;

@@ -76,6 +76,7 @@ type
 
     procedure DTPToKeyPress(Sender: TObject; var key: Char);
     procedure rbClick(Sender: TObject);
+    procedure FormResize(Sender: TObject);
 
     procedure ScrollBox1MouseWheel(Sender: TObject; Shift: TShiftState; WheelDelta: Integer; MousePos: TPoint;
       var Handled: Boolean);
@@ -705,6 +706,15 @@ begin
       ShowMessage(E.Message);
   end;
 
+end;
+
+procedure TRepApp.FormResize(Sender: TObject);
+var
+  I: Integer;
+begin
+  if ScrollBox1 <> nil then
+    for I := 0 to ScrollBox1.ControlCount - 1 do
+      TFrameTask(ScrollBox1.Controls[I]).Width := ScrollBox1.Width - 28;
 end;
 
 procedure TRepApp.lbOnClick(Sender: TObject);

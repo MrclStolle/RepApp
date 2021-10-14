@@ -2,7 +2,7 @@
 		<PropertyGroup>
 			<ProjectGuid>{52D6FC4D-10C7-4891-A4D5-913176CF4C9D}</ProjectGuid>
 			<MainSource>SDIAPP.DPR</MainSource>
-			<Config Condition="'$(Config)'==''">Debug</Config>
+			<Config Condition="'$(Config)'==''">Release</Config>
 			<DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
 			<ProjectVersion>13.4</ProjectVersion>
 			<FrameworkType>VCL</FrameworkType>

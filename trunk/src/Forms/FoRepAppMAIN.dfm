@@ -20,6 +20,7 @@ object RepApp: TRepApp
   OnClose = FormClose
   OnCreate = FormCreate
   OnMouseWheel = ScrollBox1MouseWheel
+  OnResize = FormResize
   DesignSize = (
     1162
     707)

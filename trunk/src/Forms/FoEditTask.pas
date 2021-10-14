@@ -97,8 +97,8 @@ begin
     Task.Status.SetTaskStatus(cbStatus.itemindex);
 
     // insert change into AuftrProtokoll
-    InsertIntoAuftrProt(Task.ID, User.ID, inttostr(cbStatus.itemindex), FormatDateTime('dd-mm-yy', Now),
-      floattostr(Task.hours), memBeschreibung.Text, Task.Status.WareStatusNr, inttostr(cbBillStatus.itemindex));
+    InsertIntoAuftrProt(Task.ID, User.ID, inttostr(cbStatus.itemindex), floattostr(Task.hours), memBeschreibung.Text,
+      Task.Status.WareStatusNr, inttostr(cbBillStatus.itemindex));
 
     close;
     ModalResult := mrOK;

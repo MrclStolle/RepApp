@@ -75,8 +75,8 @@ begin
   if Customer <> nil then
   begin
     cbCustomerChoise.Text := Customer.name;
-//    btCreateTaskWBooking.Enabled := not Customer.Zahlrueckstand;
-//    lbErrorNoBooking.Visible := Customer.Zahlrueckstand;
+    // btCreateTaskWBooking.Enabled := not Customer.Zahlrueckstand;
+    // lbErrorNoBooking.Visible := Customer.Zahlrueckstand;
     if Customer.FullService then
     begin
       cbBillStatus.Items.Add('Full Service');
@@ -119,12 +119,16 @@ begin
     else
       billStatus := '1';
 
-    InsertIntoTask(CustomerDictionary.GetCustomer(cbCustomerChoise.Text).id, '1', memBeschreibung.Text, '0',
+    InsertIntoTask(CustomerDictionary.GetCustomer(cbCustomerChoise.Text).id, '1', memBeschreibung.Text, '3',
       billStatus);
 
-    if (Sender as TButton).name = 'btCreateTask' then
-      InsertIntoAuftrProt('(Select MAX(AUFTRID) from AUFTRAG)', User.id, '1', FormatDateTime('dd-mm-yy', Now), '0',
-        memBeschreibung.Text, '0', billStatus);
+    // if (Sender as TButton).name = 'btCreateTask' then
+    // InsertIntoAuftrProt('(Select MAX(AUFTRID) from AUFTRAG)', User.id, '1', FormatDateTime('dd-mm-yy', Now), '0',
+    // memBeschreibung.Text, '0', billStatus);
+
+    // default auftragsstatus bei erstellung ist nun 3 ("beide richtugnen offen") um die automatische
+    // status-anpassung unter TTaskDictionary.CheckForTaskStatusDifferences zu triggern
+    // und damit gleich einen eintrag in AUFTRAGPROTOKOLL zu triggern
 
     RepApp.cbCustomerChoise.Text := self.cbCustomerChoise.Text;
     close;

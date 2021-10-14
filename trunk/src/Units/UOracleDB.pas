@@ -83,7 +83,7 @@ procedure UpdateTaskTableBillStatusID(auftrID, billStatusID: String);
 /// <param name="kommentar"> (string) </param>
 /// <param name="wareStatusID"> (string) </param>
 /// <param name="billStatusID"> (string) </param>
-procedure InsertIntoAuftrProt(auftrID, MAID, statusID, datum, ZeitaufwSt, kommentar, wareStatusID,
+procedure InsertIntoAuftrProt(auftrID, MAID, statusID, ZeitaufwSt, kommentar, wareStatusID,
   billStatusID: string);
 
 procedure GetTaskHistory(TaskID: string; var Table: TList);
@@ -214,11 +214,10 @@ begin
 end;
 
 // insert into buchpos
-procedure InsertIntoAuftrProt(auftrID, MAID, statusID, datum, ZeitaufwSt, kommentar, wareStatusID,
-  billStatusID: string);
+procedure InsertIntoAuftrProt(auftrID, MAID, statusID, ZeitaufwSt, kommentar, wareStatusID, billStatusID: string);
 begin
   ExecuteDMLQuery('Insert Into AUFTRAGPROTOKOLL values (SEQ_AUFTRPROT_ID.nextval, ' + auftrID + ', ' + MAID + ', ' +
-    statusID + ', ''' + datum + ''', ' + StringReplace(ZeitaufwSt, ',', '.', [rfReplaceAll]) + ', ''' + kommentar +
+    statusID + ', CURRENT_TIMESTAMP, ' + StringReplace(ZeitaufwSt, ',', '.', [rfReplaceAll]) + ', ''' + kommentar +
     ''', ' + wareStatusID + ', ' + billStatusID + ')');
 end;
 
