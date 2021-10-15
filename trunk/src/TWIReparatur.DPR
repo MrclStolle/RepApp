@@ -45,7 +45,7 @@ uses
   UReadTextAsTime in 'Units\UReadTextAsTime.pas',
   UEmployeeDictionary in 'Objects\UEmployeeDictionary.pas',
   FoSplashScreen in 'Forms\FoSplashScreen.pas' {FormSplashScreen},
-  URepAppExcelWriter in 'Objects\URepAppExcelWriter.pas',
+  URepAppExcelWriter in 'Units\URepAppExcelWriter.pas',
   ImportXLSToDB in 'ImportXLS\ImportXLSToDB.pas';
 
 var

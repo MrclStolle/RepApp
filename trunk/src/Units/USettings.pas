@@ -81,7 +81,7 @@ begin
    CreateConnection(defaultDBName, defaultUserName, defaultPW);
    connectedTo := 'Verbunden mit ' + defaultUserName + '@' + defaultDBName;
    if debugmode then
-   showmessage('Verindung zur öffentlichen Datenbank Hergestellt! Vorsicht mit den Daten!');
+   showmessage('Verbindung zur öffentlichen Datenbank hergestellt! Vorsicht mit den Daten!');
    end
    else
    // showmessage('Zu ' + defaultDBName + ' konnte ebenfalls keine Verbindung aufgebaut werden.');

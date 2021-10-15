@@ -207,7 +207,7 @@
 			<DCCReference Include="Forms\FoSplashScreen.pas">
 				<Form>FormSplashScreen</Form>
 			</DCCReference>
-			<DCCReference Include="Objects\URepAppExcelWriter.pas"/>
+			<DCCReference Include="Units\URepAppExcelWriter.pas"/>
 			<DCCReference Include="ImportXLS\ImportXLSToDB.pas"/>
 			<RcItem Include="images\WAIcon.png">
 				<ResourceType>RCDATA</ResourceType>
