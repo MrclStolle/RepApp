@@ -61,30 +61,17 @@ procedure TFormCreateTask.FormCreate(Sender: TObject);
 begin
   memBeschreibung.Lines.Clear;
 
-  cbBillStatus.Items.Add('Rechnung wurde gestellt');
-  cbBillStatus.Items.Add('Rechnung muss gestellt werden');
-  cbBillStatus.Items.Add('Rechnungsstatus unklar');
-  cbBillStatus.ItemIndex := 1;
-
   // fill Status-ComboBox
   cbCustomerChoise.Clear;
 
   // fills ComboBox Customers with values, sets index on same customer
   cbCustomerChoise.Items.AddStrings(RepApp.cbCustomerChoise.Items.ToStringArray);
   cbCustomerChoise.Items.Delete(0);
+
   if Customer <> nil then
-  begin
-    cbCustomerChoise.Text := Customer.name;
-    // btCreateTaskWBooking.Enabled := not Customer.Zahlrueckstand;
-    // lbErrorNoBooking.Visible := Customer.Zahlrueckstand;
-    if Customer.FullService then
-    begin
-      cbBillStatus.Items.Add('Full Service');
-      cbBillStatus.ItemIndex := 3;
-    end;
-  end
-  else
-    cbCustomerChoise.Text := '';
+    cbCustomerChoise.Text := Customer.Name;
+
+  cbCustomerChoiseChange(cbCustomerChoise);
 
 end;
 
@@ -174,6 +161,26 @@ procedure TFormCreateTask.cbCustomerChoiseChange(Sender: TObject);
 begin
   try
     Customer := CustomerDictionary.GetCustomer(cbCustomerChoise.Text);
+    cbBillStatus.Clear;
+    cbBillStatus.Items.Add('Rechnung wurde gestellt');
+    cbBillStatus.Items.Add('Rechnung muss gestellt werden');
+    cbBillStatus.Items.Add('Rechnungsstatus unklar');
+    cbBillStatus.ItemIndex := 1;
+
+    if Customer <> nil then
+    begin
+      cbCustomerChoise.Text := Customer.Name;
+      // btCreateTaskWBooking.Enabled := not Customer.Zahlrueckstand;
+      // lbErrorNoBooking.Visible := Customer.Zahlrueckstand;
+      if Customer.FullService then
+      begin
+        cbBillStatus.Items.Add('Full Service');
+        cbBillStatus.ItemIndex := 3;
+      end;
+    end
+    else
+      cbCustomerChoise.Text := '';
+
     btCreateTaskWBooking.Enabled := not Customer.Zahlrueckstand;
     lbErrorNoBooking.Visible := Customer.Zahlrueckstand;
     lbNoCustomer.Hide;
