@@ -7,7 +7,6 @@ uses
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Imaging.pngimage,
   UComponentDictionary, UCustomerDictionary, UEmployeeDictionary;
 
-{ TODO -ostolle -cvisual : redesign; could look better }
 type
   TFrameSRNHistory = class(TFrame)
     lbCompName: TLabel;

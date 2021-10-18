@@ -17,7 +17,6 @@ type
     procedure AddWA(Booking: TBooking);
     procedure AddWE(Booking: TBooking);
     procedure Free;
-    { TODO -ostolle -cGeneral : methode etwas allgemeiner nutzbar machen(?) }
     /// <summary>Gibt den Wareneingang und -ausgang nebeneinanderliegend als csv-formatierten Text aus,
     /// mit lineNr wir die Zeine angegeben, zum durch-itterieren
     /// händelt auch ungleiche mengen und nil
