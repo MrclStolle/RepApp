@@ -17,6 +17,7 @@ object RepApp: TRepApp
   ParentBiDiMode = False
   Position = poMainFormCenter
   ShowHint = True
+  WindowState = wsMaximized
   OnClose = FormClose
   OnCreate = FormCreate
   OnMouseWheel = ScrollBox1MouseWheel

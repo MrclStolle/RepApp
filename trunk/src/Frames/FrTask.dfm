@@ -183,9 +183,9 @@ object FrameTask: TFrameTask
     object lbTitleBilanz: TLabel
       Left = 3
       Top = 3
-      Width = 51
+      Width = 70
       Height = 18
-      Caption = 'Bilanz:'
+      Caption = 'Ergebnis:'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -15
@@ -195,7 +195,7 @@ object FrameTask: TFrameTask
       Transparent = True
     end
     object lbBil: TLabel
-      Left = 60
+      Left = 79
       Top = 3
       Width = 82
       Height = 18
