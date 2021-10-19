@@ -65,27 +65,22 @@ begin
   appIniPathDBCon := ChangeFileExt(Application.ExeName, '.ini');
   appIniDBCon := TIniFile.Create(appIniPathDBCon);
 
-//  TryConnectionToOfficialDB;
+  // TryConnectionToOfficialDB;
 
-  // default connection, offizielle Datenbank
-   defaultDBName := '192.168.1.113/topdb';
-   defaultUserName := 'reparatur';
-   defaultPW := 'twi';
-
-   if not LoadLastConnection then
-   begin
-   // showmessage('Zu ' + DBName + ' konnte keine Verbindung aufgebaut werden. Versuche mit ' + defaultDBName +
-   // ' zu verbinden.');
-   if TestConnection(defaultDBName, defaultUserName, defaultPW) then
-   begin
-   CreateConnection(defaultDBName, defaultUserName, defaultPW);
-   connectedTo := 'Verbunden mit ' + defaultUserName + '@' + defaultDBName;
-   if debugmode then
-   showmessage('Verbindung zur öffentlichen Datenbank hergestellt! Vorsicht mit den Daten!');
-   end
-   else
-   // showmessage('Zu ' + defaultDBName + ' konnte ebenfalls keine Verbindung aufgebaut werden.');
-   end;
+  if not LoadLastConnection then
+  begin
+    // showmessage('Zu ' + DBName + ' konnte keine Verbindung aufgebaut werden. Versuche mit ' + defaultDBName +
+    // ' zu verbinden.');
+    if TestConnection(defaultDBName, defaultUserName, defaultPW) then
+    begin
+      CreateConnection(defaultDBName, defaultUserName, defaultPW);
+      connectedTo := 'Verbunden mit ' + defaultUserName + '@' + defaultDBName;
+      if debugmode then
+        showmessage('Verbindung zur öffentlichen Datenbank hergestellt! Vorsicht mit den Daten!');
+    end
+    else
+      // showmessage('Zu ' + defaultDBName + ' konnte ebenfalls keine Verbindung aufgebaut werden.');
+  end;
 
 end;
 
