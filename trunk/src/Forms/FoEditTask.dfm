@@ -172,6 +172,20 @@ object FormEditTask: TFormEditTask
       Font.Style = []
       ParentFont = False
     end
+    object lbCharError: TLabel
+      Left = 187
+      Top = 247
+      Width = 140
+      Height = 16
+      Caption = #39' und " nicht verwendbar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      Visible = False
+    end
     object cbStatus: TComboBox
       Left = 17
       Top = 104
@@ -207,6 +221,7 @@ object FormEditTask: TFormEditTask
       ScrollBars = ssVertical
       ShowHint = False
       TabOrder = 1
+      OnKeyPress = memBeschreibungKeyPress
     end
     object cbBillStatus: TComboBox
       Left = 17

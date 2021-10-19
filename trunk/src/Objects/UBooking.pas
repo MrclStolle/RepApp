@@ -49,7 +49,7 @@ begin
   date := StrToDateTime(Row[9]);
   packageID := Row[10];
   employeeID := Row[11];
-  comment := Row[12];
+  comment := UTF8Encode(Row[12]);
   hoursStr := Row[13];
   hoursDez := StrToFloat(hoursStr);
 

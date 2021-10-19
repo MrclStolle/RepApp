@@ -52,6 +52,7 @@ type
     lbTaskMemo: TLabel;
     memTaskMemo: TMemo;
     lbZahlRueckstand: TLabel;
+    lbCharError: TLabel;
 
     procedure btAbortClick(Sender: TObject);
     procedure btAddGroupsClick(Sender: TObject);
@@ -69,6 +70,7 @@ type
     procedure FormResize(Sender: TObject);
     procedure ListBox1DblClick(Sender: TObject);
 
+    procedure MeCommentKeyPress(Sender: TObject; var Key: Char);
   private
     auftrID: string;
     CompCount: Integer;
@@ -177,7 +179,7 @@ end;
 
 procedure TFormCreateBooking.cbTypeIDChange(Sender: TObject);
 var
-  key: String;
+  Key: String;
   I: Integer;
 begin
   // erstellen von Komponenten-Feldern, wenn in der dictionary einträge vorhanden sind
@@ -194,25 +196,25 @@ begin
         if not Task.isBalanced then
         begin
           btClearScrollboxClick(nil);
-          for key in Task.ComponentBalanceDictionary.Keys do
+          for Key in Task.ComponentBalanceDictionary.Keys do
           begin
-            if Task.ComponentBalanceDictionary[key].count < 0 then
+            if Task.ComponentBalanceDictionary[Key].count < 0 then
             begin
-              if componentDictionary.GetComponent(key).NeedSerialNumber then
-                for I := 0 to -Task.ComponentBalanceDictionary[key].count - 1 do
+              if componentDictionary.GetComponent(Key).NeedSerialNumber then
+                for I := 0 to -Task.ComponentBalanceDictionary[Key].count - 1 do
                 begin
                   AddComponentFrCB;
-                  TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).cbComponent.Text := key;
+                  TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).cbComponent.Text := Key;
                   cbComp(TComboBox(TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).Controls[3]));
                   TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).eCount.Text := '1';
                 end
               else
               begin
                 AddComponentFrCB;
-                TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).cbComponent.Text := key;
+                TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).cbComponent.Text := Key;
                 cbComp(TComboBox(TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).Controls[3]));
                 TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).eCount.Text :=
-                  IntToStr(-Task.ComponentBalanceDictionary[key].count);
+                  IntToStr(-Task.ComponentBalanceDictionary[Key].count);
               end;
             end;
           end; // end loop
@@ -231,25 +233,25 @@ begin
         if not Task.isBalanced then
         begin
           btClearScrollboxClick(nil);
-          for key in Task.ComponentBalanceDictionary.Keys do
+          for Key in Task.ComponentBalanceDictionary.Keys do
           begin
-            if Task.ComponentBalanceDictionary[key].count > 0 then
+            if Task.ComponentBalanceDictionary[Key].count > 0 then
             begin
-              if componentDictionary.GetComponent(key).NeedSerialNumber then
-                for I := 0 to Task.ComponentBalanceDictionary[key].count - 1 do
+              if componentDictionary.GetComponent(Key).NeedSerialNumber then
+                for I := 0 to Task.ComponentBalanceDictionary[Key].count - 1 do
                 begin
                   AddComponentFrCB;
-                  TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).cbComponent.Text := key;
+                  TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).cbComponent.Text := Key;
                   cbComp(TComboBox(TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).Controls[3]));
                   TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).eCount.Text := '1';
                 end
               else
               begin
                 AddComponentFrCB;
-                TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).cbComponent.Text := key;
+                TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).cbComponent.Text := Key;
                 cbComp(TComboBox(TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).Controls[3]));
                 TFrameComponentBox(ScrollBox1.Controls[CompCount - 1]).eCount.Text :=
-                  IntToStr(Task.ComponentBalanceDictionary[key].count);
+                  IntToStr(Task.ComponentBalanceDictionary[Key].count);
               end;
             end;
           end // end loop
@@ -403,8 +405,8 @@ begin
       // insert into buchungen
       OQ.SQL.Text := OQ.SQL.Text + 'Insert into buchungen values (SEQ_BUCH_ID.nextval, ' + auftrID + ', ' +
         IntToStr(cbTypeID.ItemIndex) + ', ''' + FormatDateTime('dd-mm-yy', DateTimePicker1.date) + ''', ''' +
-        EdPackageID.Text + ''', ' + User.ID + ', ''' + MeComment.Text + ''', ' + StringReplace(FloatToStr(HourDez), ',',
-        '.', [rfReplaceAll]) + ');';
+        EdPackageID.Text + ''', ' + User.ID + ', ''' + UTF8Encode(MeComment.Text) + ''', ' +
+        StringReplace(FloatToStr(HourDez), ',', '.', [rfReplaceAll]) + ');';
 
       ModalResult := mrOK;
 
@@ -664,6 +666,18 @@ begin
     end;
   end;
   // resultlist.Free;
+end;
+
+procedure TFormCreateBooking.MeCommentKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key in ['"', ''''] then
+  begin
+    Key := #0;
+    lbCharError.Show;
+  end
+  else
+    lbCharError.hide;
+
 end;
 
 end.

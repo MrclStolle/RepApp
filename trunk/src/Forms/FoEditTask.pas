@@ -24,10 +24,12 @@ type
     cbStatus: TComboBox;
     memBeschreibung: TMemo;
     cbBillStatus: TComboBox;
+    lbCharError: TLabel;
     procedure btAbortClick(Sender: TObject);
     procedure btOKClick(Sender: TObject);
 
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure memBeschreibungKeyPress(Sender: TObject; var Key: Char);
   public
     { Public-Deklarationen }
 
@@ -87,7 +89,7 @@ procedure TFormEditTask.btOKClick(Sender: TObject);
 begin
   begin
     // update DB
-    UpdateTaskTable(Task.ID, inttostr(cbStatus.itemindex), memBeschreibung.Text, Task.Status.WareStatusNr,
+    UpdateTaskTable(Task.ID, inttostr(cbStatus.itemindex), UTF8Encode(memBeschreibung.Text), Task.Status.WareStatusNr,
       inttostr(cbBillStatus.itemindex));
 
     // Update local
@@ -109,6 +111,17 @@ end;
 procedure TFormEditTask.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   ReleaseTaskRow(Task.ID);
+end;
+
+procedure TFormEditTask.memBeschreibungKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key in ['"', ''''] then
+  begin
+    Key := #0;
+    lbCharError.Show;
+  end
+  else
+    lbCharError.hide;
 end;
 
 end.

@@ -24,6 +24,7 @@ type
     btCreateTaskWBooking: TButton;
     btCreateTask: TButton;
     btAbort: TButton;
+    lbCharError: TLabel;
 
     procedure FormCreate(Sender: TObject);
     procedure btCreateCustomerClick(Sender: TObject);
@@ -33,6 +34,7 @@ type
 
     procedure cbCustomerChoiseChange(Sender: TObject);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure memBeschreibungKeyPress(Sender: TObject; var Key: Char);
   private
 
   public
@@ -106,7 +108,7 @@ begin
     else
       billStatus := '1';
 
-    InsertIntoTask(CustomerDictionary.GetCustomer(cbCustomerChoise.Text).id, '1', memBeschreibung.Text, '3',
+    InsertIntoTask(CustomerDictionary.GetCustomer(cbCustomerChoise.Text).id, '1', UTF8Encode(memBeschreibung.Text), '3',
       billStatus);
 
     // if (Sender as TButton).name = 'btCreateTask' then
@@ -194,6 +196,18 @@ procedure TFormCreateTask.FormKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = chr(27) then
     close;
+end;
+
+procedure TFormCreateTask.memBeschreibungKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key in ['"', ''''] then
+  begin
+    Key := #0;
+    lbCharError.Show;
+  end
+  else
+    lbCharError.hide;
+
 end;
 
 end.

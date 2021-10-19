@@ -418,6 +418,20 @@ object FormCreateBooking: TFormCreateBooking
       ParentFont = False
       Visible = False
     end
+    object lbCharError: TLabel
+      Left = 99
+      Top = 260
+      Width = 140
+      Height = 16
+      Caption = #39' und " nicht verwendbar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      Visible = False
+    end
     object cbTypeID: TComboBox
       Left = 49
       Top = 38
@@ -481,6 +495,7 @@ object FormCreateBooking: TFormCreateBooking
       ParentFont = False
       ScrollBars = ssVertical
       TabOrder = 5
+      OnKeyPress = MeCommentKeyPress
     end
     object etHours: TEdit
       Left = 16

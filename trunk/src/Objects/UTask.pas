@@ -65,7 +65,7 @@ begin
   // self.Customer := Customer;
   // StatusID := StrToInt(Row[2]);
   self.CustomerID := CustomerID;
-  Kommentar := Row[3];
+  Kommentar := UTF8Encode(Row[3]);
   Status.Create(StrToInt(Row[2]), StrToInt(Row[4]), StrToInt(Row[5]));
 
 end;

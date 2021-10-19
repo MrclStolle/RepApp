@@ -3,7 +3,7 @@ object FormCreateTask: TFormCreateTask
   Top = 0
   AutoSize = True
   Caption = 'Auftrag Erstellen'
-  ClientHeight = 493
+  ClientHeight = 509
   ClientWidth = 345
   Color = clGradientInactiveCaption
   Font.Charset = DEFAULT_CHARSET
@@ -37,7 +37,7 @@ object FormCreateTask: TFormCreateTask
   end
   object lbErrorNoBooking: TLabel
     Left = 23
-    Top = 434
+    Top = 450
     Width = 202
     Height = 39
     AutoSize = False
@@ -53,7 +53,7 @@ object FormCreateTask: TFormCreateTask
   end
   object btCreateCustomer: TButton
     Left = 234
-    Top = 362
+    Top = 378
     Width = 89
     Height = 25
     Hint = 'Neuen Kunden anlegen'
@@ -73,7 +73,7 @@ object FormCreateTask: TFormCreateTask
     Left = 20
     Top = 59
     Width = 305
-    Height = 297
+    Height = 313
     AutoSize = True
     Padding.Left = 15
     Padding.Top = 15
@@ -82,7 +82,7 @@ object FormCreateTask: TFormCreateTask
     TabOrder = 1
     object lbTitleComment: TLabel
       Left = 17
-      Top = 146
+      Top = 162
       Width = 200
       Height = 16
       Caption = 'Auftrags-Beschreibung/Kommentar'
@@ -133,6 +133,20 @@ object FormCreateTask: TFormCreateTask
       Font.Style = []
       ParentFont = False
     end
+    object lbCharError: TLabel
+      Left = 17
+      Top = 142
+      Width = 140
+      Height = 19
+      Caption = #39' und " nicht verwendbar'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      Visible = False
+    end
     object cbCustomerChoise: TComboBox
       Left = 16
       Top = 38
@@ -151,7 +165,7 @@ object FormCreateTask: TFormCreateTask
     end
     object memBeschreibung: TMemo
       Left = 16
-      Top = 168
+      Top = 184
       Width = 273
       Height = 113
       Hint = 'Nennenswerte Informationen zum Auftrag.'
@@ -170,6 +184,7 @@ object FormCreateTask: TFormCreateTask
       ScrollBars = ssVertical
       ShowHint = False
       TabOrder = 1
+      OnKeyPress = memBeschreibungKeyPress
     end
     object cbBillStatus: TComboBox
       Left = 16
@@ -188,7 +203,7 @@ object FormCreateTask: TFormCreateTask
   end
   object btCreateTaskWBooking: TButton
     Left = 23
-    Top = 362
+    Top = 378
     Width = 148
     Height = 25
     Hint = 'Diesem Auftrag direkt eine Buchung hinzuf'#252'gen.'
@@ -205,7 +220,7 @@ object FormCreateTask: TFormCreateTask
   end
   object btCreateTask: TButton
     Left = 23
-    Top = 403
+    Top = 419
     Width = 148
     Height = 25
     Hint = 'Auftrag wird sofort erstellt. R'#252'ckkehr zum Hauptfenster.'
@@ -221,7 +236,7 @@ object FormCreateTask: TFormCreateTask
   end
   object btAbort: TButton
     Left = 234
-    Top = 403
+    Top = 419
     Width = 89
     Height = 25
     Cancel = True
